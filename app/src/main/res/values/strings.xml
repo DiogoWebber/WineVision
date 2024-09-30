@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">diogo</string>
+    <string name="reservar">reservar</string>
+    <string name="configurações">configurações</string>
+    <string name="corReserva">Mesas Reservas</string>
+    <string name="corPadrao">Mesas Disponiveis</string>
+    <string name="edit_login_acesso">Login</string>
+    <string name="edit_senha_acesso">Senha de acesso</string>
+    <string name="btn_entrar">ENTRAR</string>
+    <string name="btn_registrar">REGISTRAR</string>
+    <string name="mesa1">mesa1</string>
+    <string name="mesa2">mesa2</string>
+    <string name="mesa3">mesa3</string>
+    <string name="mesa4">mesa4</string>
+    <string name="mesa5">mesa5</string>
+    <string name="mesa6">mesa6</string>
+    <string name="mesa7">mesa7</string>
+    <string name="mesa8">mesa8</string>
+    <string name="mesa9">mesa9</string>
+    <string name="salvar">salvar</string>
+</resources>
