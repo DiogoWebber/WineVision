@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editLoginAcesso;
     private EditText editSenhaAcesso;
     private Button btnEntrar;
-    private Button btnRegistrar;
+    private TextView clickableText; // Alterado para TextView
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,19 +40,13 @@ public class LoginActivity extends AppCompatActivity {
 
         editLoginAcesso = findViewById(R.id.editLoginAcesso);
         editSenhaAcesso = findViewById(R.id.editSenhaAcesso);
-
-        // Carregar os últimos login e senha salvos
-        String ultimoLogin = sharedPreferences.getString("ultimoLogin", "");
-        String ultimaSenha = sharedPreferences.getString("ultimaSenha", "");
-
-        editLoginAcesso.setText(ultimoLogin);
-        editSenhaAcesso.setText(ultimaSenha);
-
         btnEntrar = findViewById(R.id.btnEntrar);
+        clickableText = findViewById(R.id.clickableText); // Inicializa o TextView
+
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Obtém o texto digitado nos campos de login e senha
+                // Lógica de autenticação
                 String login = editLoginAcesso.getText().toString();
                 String senha = editSenhaAcesso.getText().toString();
 
@@ -65,9 +60,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent it = new Intent(LoginActivity.this, ReservasActivity.class);
                     startActivity(it);
-                    finish(); // Fecha a LoginActivity para que não possa ser retornada
+                    finish();
                 } else if ("Adm".equals(login) && "Adm123".equals(senha)) {
-                    // Salvar estado de autenticação e credenciais
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("isAuthenticated", true);
                     editor.putString("ultimoLogin", login);
@@ -76,21 +70,20 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent it = new Intent(LoginActivity.this, ReservasActivity.class);
                     startActivity(it);
-                    finish(); // Fecha a LoginActivity para que não possa ser retornada
+                    finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Login ou senha inválidos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        btnRegistrar = findViewById(R.id.btnRegistrar);
-        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+        // Configura o listener para o TextView clicável
+        clickableText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(LoginActivity.this, ReservasActivity.class);
+                Intent it = new Intent(LoginActivity.this, RegistroActivity.class);
                 startActivity(it);
             }
         });
-
     }
 }

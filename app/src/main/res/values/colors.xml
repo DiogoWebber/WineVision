@@ -12,4 +12,7 @@
     <color name="brown">#8B4513</color>
     <color name="cyan">#00FFFF</color>
     <color name="gold">#9F8F00</color>
+    <color name="bordô">#82120a</color>
+    <color name="cinza">#1c2120</color>
+    <color name="cinzat">#80484d50</color>
 </resources>
