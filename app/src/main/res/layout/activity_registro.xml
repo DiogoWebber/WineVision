@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/textPrincipal"
                 android:layout_height="wrap_content"
@@ -46,6 +47,7 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
+                <!-- Nome Completo -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -62,6 +64,7 @@
                     android:textColorHint="@color/white"
                     android:layout_width="match_parent" />
 
+                <!-- Email -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,7 +73,6 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:paddingEnd="40dp"/>
-
                 <EditText
                     android:id="@+id/editEmail"
                     android:hint="E-mail"
@@ -79,6 +81,7 @@
                     android:textColorHint="@color/white"
                     android:layout_width="match_parent" />
 
+                <!-- Telefone -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -91,6 +94,40 @@
                     android:id="@+id/editTelefone"
                     android:hint="+55 (48) 998212367"
                     android:inputType="text|number"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent" />
+
+                <!-- Endereço -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="ENDEREÇO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"/>
+                <EditText
+                    android:id="@+id/editEndereco"
+                    android:hint="Rua Exemplo"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent" />
+
+                <!-- Número -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="NÚMERO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"/>
+                <EditText
+                    android:id="@+id/editNumero"
+                    android:hint="123"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
                     android:layout_width="match_parent" />
@@ -133,7 +170,7 @@
                     android:layout_width="match_parent"
                     android:hint="CPF ou CNPJ"
                     android:textColorHint="@color/white"
-                />
+                    />
 
                 <Button
                     android:id="@+id/btnRegistrar"
