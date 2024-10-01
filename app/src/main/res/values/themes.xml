@@ -3,6 +3,8 @@
     <style name="Base.Theme.Diogo" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorButtonNormal">@color/cinza</item> <!-- Aqui você define a cor padrão dos botões -->
+
     </style>
 
     <style name="Theme.Diogo" parent="Base.Theme.Diogo" />

@@ -1,29 +1,111 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@drawable/fundo"
+    android:gravity="center"
+    android:paddingTop="100dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginTop="140dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/viewClientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CLIENTES"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_edittext_background"
+                android:drawableStart="@drawable/group"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <TextView
+                android:id="@+id/viewVinhos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VINHOS"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_edittext_background"
+                android:drawableStart="@drawable/wine"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <TextView
+                android:id="@+id/viewVendas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VENDAS"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_edittext_background"
+                android:drawableStart="@drawable/vendas"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <TextView
+                android:id="@+id/viewRelatorioMensal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RELATÓRIO MENSAL"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:padding="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/rounded_edittext_background"
+                android:drawableStart="@drawable/relatorio"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_height="wrap_content"
+                android:text="LOGOUT"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:backgroundTint="@color/cinza"
+                android:layout_gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

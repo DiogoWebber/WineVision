@@ -2,7 +2,10 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:paddingTop="20dp">
 
     <ImageView
         android:layout_height="wrap_content"
@@ -14,24 +17,26 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_height="241dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="350dp"
-                 />
-
             <TextView
                 android:id="@+id/textPrincipal"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="JUNTE-SE À FORÇA"
+                android:text="CLIENTES"
                 android:textAlignment="center"
-                android:textColor="@color/gold"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/RegistroClientes"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Registro dos Clientes"
+                android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="36sp"
                 android:textStyle="bold" />
 
@@ -41,41 +46,102 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="NOME COMPLETO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"/>
+                <EditText
+                    android:id="@+id/editNome"
+                    android:hint="Débora Figueiredo"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="E-MAIL"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"/>
+
                 <EditText
                     android:id="@+id/editEmail"
                     android:hint="E-mail"
                     android:inputType="textEmailAddress"
                     android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
                     android:layout_width="match_parent" />
 
-                <EditText
-                    android:id="@+id/editConfirmaEmail"
-                    android:hint="Confirme seu E-mail"
-                    android:inputType="textEmailAddress"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="TELEFONE"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"/>
+                <EditText
+                    android:id="@+id/editTelefone"
+                    android:hint="+55 (48) 998212367"
+                    android:inputType="text|number"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
                     android:layout_width="match_parent" />
 
-                <EditText
-                    android:id="@+id/editSenha"
-                    android:hint="Senha"
-                    android:inputType="textPassword"
+                <!-- RadioGroup para selecionar CPF ou CNPJ -->
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent" />
+                    android:layout_marginTop="10dp"
+                    android:text="SELECIONAR TIPO DE DOCUMENTO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
+
+                    <RadioButton
+                        android:id="@+id/radioCPF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CPF"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        android:id="@+id/radioCNPJ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CNPJ"
+                        android:textColor="@color/white" />
+                </RadioGroup>
 
                 <EditText
-                    android:id="@+id/editConfirmaSenha"
-                    android:hint="Confirme sua senha"
-                    android:inputType="textPassword"
+                    android:id="@+id/editDocumento"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent" />
+                    android:layout_width="match_parent"
+                    android:hint="CPF ou CNPJ"
+                    android:textColorHint="@color/white"
+                />
 
                 <Button
                     android:id="@+id/btnRegistrar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="REGISTRAR JEDI" />
-
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/cinza"
+                    android:text="REGISTRAR"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

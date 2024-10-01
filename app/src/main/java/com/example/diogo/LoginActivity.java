@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editLoginAcesso;
     private EditText editSenhaAcesso;
     private Button btnEntrar;
-    private TextView clickableText; // Alterado para TextView
+    private TextView clickableText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,13 +29,11 @@ public class LoginActivity extends AppCompatActivity {
         boolean isAuthenticated = sharedPreferences.getBoolean("isAuthenticated", false);
 
         if (isAuthenticated) {
-            Intent intent = new Intent(LoginActivity.this, ReservasActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             return;
         }
-
-        // Configura o layout da atividade de login
         setContentView(R.layout.activity_login);
 
         editLoginAcesso = findViewById(R.id.editLoginAcesso);
@@ -46,29 +44,16 @@ public class LoginActivity extends AppCompatActivity {
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Lógica de autenticação
                 String login = editLoginAcesso.getText().toString();
                 String senha = editSenhaAcesso.getText().toString();
-
-                if ("Administrador".equals(login) && "Administrador".equals(senha)) {
-                    // Salvar estado de autenticação e credenciais
+                 if ("Adm".equals(login) && "Adm123".equals(senha)) {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("isAuthenticated", true);
                     editor.putString("ultimoLogin", login);
                     editor.putString("ultimaSenha", senha);
                     editor.apply();
 
-                    Intent it = new Intent(LoginActivity.this, ReservasActivity.class);
-                    startActivity(it);
-                    finish();
-                } else if ("Adm".equals(login) && "Adm123".equals(senha)) {
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("isAuthenticated", true);
-                    editor.putString("ultimoLogin", login);
-                    editor.putString("ultimaSenha", senha);
-                    editor.apply();
-
-                    Intent it = new Intent(LoginActivity.this, ReservasActivity.class);
+                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(it);
                     finish();
                 } else {
@@ -77,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Configura o listener para o TextView clicável
         clickableText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
