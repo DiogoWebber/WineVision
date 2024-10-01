@@ -28,8 +28,12 @@ public class MainActivity extends AppCompatActivity { // Extende AppCompatActivi
         });
         // Inicializa os TextViews e define os listeners de clique
         TextView viewClientes = findViewById(R.id.viewClientes);
-        viewClientes.setOnClickListener(v -> {
-            // Ação para o clique no "CLIENTES"
+        viewClientes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ClientesActivity.class);
+                startActivity(intent);
+            }
         });
 
         TextView viewVinhos = findViewById(R.id.viewVinhos);

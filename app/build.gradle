@@ -30,13 +30,23 @@ android {
 }
 
 dependencies {
+    def room_version = "2.5.0"
 
-    implementation libs.appcompat
-    implementation libs.material
-    implementation libs.activity
-    implementation libs.constraintlayout
-    testImplementation libs.junit
-    androidTestImplementation libs.ext.junit
-    androidTestImplementation libs.espresso.core
+    // Room dependencies
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version" // Para Java
 
+    // RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+    // AndroidX Libraries
+    implementation 'androidx.appcompat:appcompat:1.6.1' // Use uma versão estável
+    implementation 'com.google.android.material:material:1.10.0' // Use uma versão estável
+    implementation 'androidx.activity:activity-ktx:1.7.2' // Use uma versão estável
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // Use uma versão estável
+
+    // Testing Libraries
+    testImplementation 'junit:junit:4.13.2' // Use uma versão estável
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5' // Use uma versão estável
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Use uma versão estável
 }
