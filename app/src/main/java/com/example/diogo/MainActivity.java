@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity { // Extende AppCompatActivity
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) { // Método onCreate
+    protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this); // Habilita a funcionalidade EdgeToEdge
         setContentView(R.layout.activity_main); // Define o layout da atividade
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity { // Extende AppCompatActivi
         viewRelatorioMensal.setOnClickListener(v -> {
             // Ação para o clique no "RELATÓRIO MENSAL"
         });
+
+
     }
     private void limparSharedPreferences() {
         SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);

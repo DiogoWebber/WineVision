@@ -34,7 +34,8 @@
                 android:drawablePadding="-20dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:focusableInTouchMode="true" />
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/garamond"/>
 
             <TextView
                 android:id="@+id/viewVinhos"
@@ -53,7 +54,8 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:clickable="true"
                 android:focusable="true"
-                android:focusableInTouchMode="true" />
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/garamond"/>
 
             <TextView
                 android:id="@+id/viewVendas"
@@ -72,7 +74,8 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:clickable="true"
                 android:focusable="true"
-                android:focusableInTouchMode="true" />
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/garamond"/>
 
             <TextView
                 android:id="@+id/viewRelatorioMensal"
@@ -91,7 +94,8 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:clickable="true"
                 android:focusable="true"
-                android:focusableInTouchMode="true" />
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/garamond"/>
 
             <Button
                 android:id="@+id/btnLogout"
@@ -104,7 +108,8 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:backgroundTint="@color/cinza"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:fontFamily="@font/garamond"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

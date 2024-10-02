@@ -18,7 +18,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editLoginAcesso;
     private EditText editSenhaAcesso;
     private Button btnEntrar;
-    private TextView clickableText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         editLoginAcesso = findViewById(R.id.editLoginAcesso);
         editSenhaAcesso = findViewById(R.id.editSenhaAcesso);
         btnEntrar = findViewById(R.id.btnEntrar);
-        clickableText = findViewById(R.id.clickableText); // Inicializa o TextView
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,14 +57,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "Login ou senha inválidos", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        clickableText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(LoginActivity.this, RegistroActivity.class);
-                startActivity(it);
             }
         });
     }

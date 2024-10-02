@@ -1,6 +1,5 @@
 // Adapter class for RecyclerView
-package com.example.diogo.adapter;
-
+package com.example.diogo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

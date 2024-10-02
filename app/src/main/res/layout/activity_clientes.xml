@@ -13,7 +13,9 @@
         android:text="CLIENTES"
         android:textColor="@color/white"
         android:gravity="center"
-        android:textSize="30dp"/>
+        android:textSize="30dp"
+        android:fontFamily="@font/garamond"
+    />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -21,7 +23,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
-         />
+        android:fontFamily="@font/garamond"
+        android:layout_above="@id/btnRegistrar"
 
-
+    />
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/cinza"
+        android:text="REGISTRAR NOVO CLIENTE"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+    />
 </RelativeLayout>

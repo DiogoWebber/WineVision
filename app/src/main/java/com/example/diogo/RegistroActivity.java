@@ -1,8 +1,11 @@
 package com.example.diogo;
 
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +17,10 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText editNome, editEmail, editTelefone, editEndereco, editNumero, editDocumento;
     private Button btnRegistrar;
     private ClienteDAO clienteDAO;
+    private RadioGroup radioGroup;
+    private RadioButton radioCPF, radioCNPJ;
+    private TextWatcher cpfMask, cnpjMask, telefoneMask;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +34,28 @@ public class RegistroActivity extends AppCompatActivity {
         editEndereco = findViewById(R.id.editEndereco);
         editNumero = findViewById(R.id.editNumero);
         editDocumento = findViewById(R.id.editDocumento);
+        radioGroup = findViewById(R.id.radioGroup);
+        radioCPF = findViewById(R.id.radioCPF);
+        radioCNPJ = findViewById(R.id.radioCNPJ);
+        editTelefone = findViewById(R.id.editTelefone);
 
+        telefoneMask = MaskEditText.insert("+## (##) #####-####", editTelefone);
+        editTelefone.addTextChangedListener(telefoneMask);
+        cpfMask = MaskEditText.insert("###.###.###-##", editDocumento);
+        cnpjMask = MaskEditText.insert("##.###.###/####-##", editDocumento);
+
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            editDocumento.removeTextChangedListener(cpfMask);
+            editDocumento.removeTextChangedListener(cnpjMask);
+
+            if (checkedId == R.id.radioCPF) {
+                editDocumento.setText("");
+                editDocumento.addTextChangedListener(cpfMask);
+            } else if (checkedId == R.id.radioCNPJ) {
+                editDocumento.setText("");
+                editDocumento.addTextChangedListener(cnpjMask);
+            }
+        });
         btnRegistrar = findViewById(R.id.btnRegistrar);
 
         btnRegistrar.setOnClickListener(v -> {
