@@ -1,6 +1,7 @@
 package com.example.diogo;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,9 @@ public class ClientesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.vinho));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clientes);
         btnRegistrar = findViewById(R.id.btnRegistrar);

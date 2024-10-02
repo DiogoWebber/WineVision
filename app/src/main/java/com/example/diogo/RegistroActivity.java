@@ -1,5 +1,6 @@
 package com.example.diogo;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextWatcher;
 import android.widget.Button;
@@ -24,6 +25,9 @@ public class RegistroActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.vinho));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 

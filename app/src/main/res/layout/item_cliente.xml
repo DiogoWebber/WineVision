@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    app:cardBackgroundColor="@color/vinho"
+    app:cardBackgroundColor="#360707"
     android:elevation="4dp"
     app:cardCornerRadius="12dp">
 
@@ -40,4 +40,4 @@ android:padding="20dp">
     android:layout_marginBottom="0dp"
     android:textColor="@color/white"/>
 </LinearLayout>
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>

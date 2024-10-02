@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/vinho"
     android:gravity="center"
-    android:paddingTop="30dp"
+    android:paddingTop="20dp"
    >
 
     <TextView
@@ -22,19 +22,24 @@
         android:id="@+id/recyclerViewClientes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/garamond"
         android:layout_above="@id/btnRegistrar"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="19dp"
 
-    />
+        android:fontFamily="@font/garamond" />
+
     <Button
         android:id="@+id/btnRegistrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/white"
+        android:gravity="center"
         android:backgroundTint="@color/cinza"
         android:text="REGISTRAR NOVO CLIENTE"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="10dp"
     />
 </RelativeLayout>
