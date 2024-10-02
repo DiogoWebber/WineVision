@@ -30,11 +30,8 @@ public class ClientesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clientes);
         btnRegistrar = findViewById(R.id.btnRegistrar);
-
-
         recyclerView = findViewById(R.id.recyclerViewClientes);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         clienteDAO = new ClienteDAO(this);
         loadClientes();
 
@@ -46,10 +43,9 @@ public class ClientesActivity extends AppCompatActivity {
             }
         });
     }
-
     private void loadClientes() {
         List<ClientesModel> clientesList = clienteDAO.getAll();
-        adapter = new ClientesAdapter(clientesList);
+        adapter = new ClientesAdapter(clientesList, this);
         recyclerView.setAdapter(adapter);
     }
 }

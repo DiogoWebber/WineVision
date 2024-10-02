@@ -101,5 +101,78 @@ public class ClienteDAO extends AbstrataDAO {
 
         return clientesList; // Retorna a lista de clientes
     }
+    public ClientesModel getById(long id) {
+        ClientesModel cliente = null;
+        Cursor cursor = null;
 
+        try {
+            Open();
+            String selection = ClientesModel.COLUNA_ID + " = ?";
+            String[] selectionArgs = { String.valueOf(id) };
+
+            cursor = db.query(ClientesModel.TABLE_NAME, null, selection, selectionArgs, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                cliente = new ClientesModel();
+
+                int idIndex = cursor.getColumnIndex(ClientesModel.COLUNA_ID);
+                int nomeIndex = cursor.getColumnIndex(ClientesModel.COLUNA_CLIENTE);
+                int emailIndex = cursor.getColumnIndex(ClientesModel.COLUNA_EMAIL);
+                int telefoneIndex = cursor.getColumnIndex(ClientesModel.COLUNA_TELEFONE);
+                int enderecoIndex = cursor.getColumnIndex(ClientesModel.COLUNA_ENDERECO);
+                int numeroIndex = cursor.getColumnIndex(ClientesModel.COLUNA_NUMERO);
+                int documentoIndex = cursor.getColumnIndex(ClientesModel.COLUNA_DOCUMENTO);
+
+                if (idIndex != -1) {
+                    cliente.setId(cursor.getLong(idIndex));
+                }
+                if (nomeIndex != -1) {
+                    cliente.setNome(cursor.getString(nomeIndex));
+                }
+                if (emailIndex != -1) {
+                    cliente.setEmail(cursor.getString(emailIndex));
+                }
+                if (telefoneIndex != -1) {
+                    cliente.setTelefone(cursor.getString(telefoneIndex));
+                }
+                if (enderecoIndex != -1) {
+                    cliente.setEndereco(cursor.getString(enderecoIndex));
+                }
+                if (numeroIndex != -1) {
+                    cliente.setNumero(cursor.getInt(numeroIndex));
+                }
+                if (documentoIndex != -1) {
+                    cliente.setDocumento(cursor.getString(documentoIndex));
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            Close();
+        }
+
+        return cliente;
+    }
+    public long update(ClientesModel cliente) {
+        long result = -1;
+        try {
+            Open();
+            ContentValues values = new ContentValues();
+            values.put(ClientesModel.COLUNA_CLIENTE, cliente.getNome());
+            values.put(ClientesModel.COLUNA_EMAIL, cliente.getEmail());
+            values.put(ClientesModel.COLUNA_TELEFONE, cliente.getTelefone());
+            values.put(ClientesModel.COLUNA_ENDERECO, cliente.getEndereco());
+            values.put(ClientesModel.COLUNA_NUMERO, cliente.getNumero());
+            values.put(ClientesModel.COLUNA_DOCUMENTO, cliente.getDocumento());
+
+            String whereClause = ClientesModel.COLUNA_ID + " = ?";
+            String[] whereArgs = { String.valueOf(cliente.getId()) };
+
+            result = db.update(ClientesModel.TABLE_NAME, values, whereClause, whereArgs);
+        } finally {
+            Close();
+        }
+        return result;
+    }
 }

@@ -1,10 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/vinho"
-    android:gravity="center"
-    android:paddingTop="20dp"
-   >
+    android:orientation="vertical"
+    android:paddingTop="20dp">
 
     <TextView
         android:layout_width="match_parent"
@@ -13,19 +12,15 @@
         android:text="CLIENTES"
         android:textColor="@color/white"
         android:gravity="center"
-        android:textSize="30dp"
-        android:fontFamily="@font/garamond"
-    />
-
+        android:textSize="30sp"
+        android:fontFamily="@font/garamond" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewClientes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/btnRegistrar"
-        android:layout_marginTop="50dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginBottom="19dp"
-
         android:fontFamily="@font/garamond" />
 
     <Button
@@ -39,7 +34,5 @@
         android:gravity="center"
         android:backgroundTint="@color/cinza"
         android:text="REGISTRAR NOVO CLIENTE"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-    />
-</RelativeLayout>
+        android:layout_marginBottom="10dp" />
+</LinearLayout>
