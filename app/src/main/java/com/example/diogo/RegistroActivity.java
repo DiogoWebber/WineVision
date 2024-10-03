@@ -1,5 +1,6 @@
 package com.example.diogo;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextWatcher;
@@ -13,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.diogo.database.dao.ClienteDAO;
 import com.example.diogo.database.model.ClientesModel;
+
+import java.util.List;
+
 public class RegistroActivity extends AppCompatActivity {
 
     private EditText editNome, editEmail, editTelefone, editEndereco, editNumero, editDocumento;
@@ -21,10 +25,12 @@ public class RegistroActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton radioCPF, radioCNPJ;
     private TextWatcher cpfMask, cnpjMask, telefoneMask;
-
-
+    private List<ClientesModel> clientesList;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.vinho));
         }
@@ -63,7 +69,6 @@ public class RegistroActivity extends AppCompatActivity {
         btnRegistrar = findViewById(R.id.btnRegistrar);
 
         btnRegistrar.setOnClickListener(v -> {
-
             clienteDAO = new ClienteDAO(RegistroActivity.this);
 
             ClientesModel clientesModel = new ClientesModel();
@@ -72,18 +77,19 @@ public class RegistroActivity extends AppCompatActivity {
             clientesModel.setTelefone(editTelefone.getText().toString());
             clientesModel.setEndereco(editEndereco.getText().toString());
             clientesModel.setNumero(Integer.parseInt(editNumero.getText().toString()));
-            clientesModel.setDocumento(editDocumento.getText().toString()); // Adiciona o documento
+            clientesModel.setDocumento(editDocumento.getText().toString());
 
-            if(clienteDAO.insert(clientesModel)!= -1){
+            if(clienteDAO.insert(clientesModel) != -1){
                 Toast.makeText(RegistroActivity.this, "Usuário Salvo!!!", Toast.LENGTH_SHORT).show();
-            }
-            else{
+                setResult(RESULT_OK);
+                finish();
+            } else {
                 Toast.makeText(RegistroActivity.this, "Falha ao Salvar o Usuário!!", Toast.LENGTH_SHORT).show();
-
             }
-            // Opcional: Limpar os campos após a inserção
+
             limparCampos();
         });
+
     }
 
     private void limparCampos() {

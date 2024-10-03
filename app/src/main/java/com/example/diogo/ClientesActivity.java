@@ -16,7 +16,7 @@ import com.example.diogo.database.model.ClientesModel;
 import java.util.List;
 
 public class ClientesActivity extends AppCompatActivity {
-
+    private static final int REQUEST_CODE_REGISTRO = 1;
     private RecyclerView recyclerView;
     private ClientesAdapter adapter;
     private ClienteDAO clienteDAO;
@@ -39,7 +39,7 @@ public class ClientesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(ClientesActivity.this, RegistroActivity.class);
-                startActivity(it);
+                startActivityForResult(it, REQUEST_CODE_REGISTRO);
             }
         });
     }
@@ -51,7 +51,14 @@ public class ClientesActivity extends AppCompatActivity {
 
     public void refreshClientes() {
         ClienteDAO clienteDAO = new ClienteDAO(this);
-        List<ClientesModel> novosClientes = clienteDAO.getAll(); // Método para buscar todos os clientes
+        List<ClientesModel> novosClientes = clienteDAO.getAll();
         adapter.updateClientes(novosClientes);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_REGISTRO && resultCode == RESULT_OK) {
+            refreshClientes(); // Atualiza a lista de clientes
+        }
     }
 }
