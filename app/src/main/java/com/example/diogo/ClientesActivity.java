@@ -48,4 +48,10 @@ public class ClientesActivity extends AppCompatActivity {
         adapter = new ClientesAdapter(clientesList, this);
         recyclerView.setAdapter(adapter);
     }
+
+    public void refreshClientes() {
+        ClienteDAO clienteDAO = new ClienteDAO(this);
+        List<ClientesModel> novosClientes = clienteDAO.getAll(); // Método para buscar todos os clientes
+        adapter.updateClientes(novosClientes);
+    }
 }

@@ -1,8 +1,9 @@
 package com.example.diogo;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log; // Importar a classe Log
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +14,6 @@ import com.example.diogo.database.model.ClientesModel;
 
 public class EditUserActivity extends AppCompatActivity {
 
-    private static final String TAG = "EditUserActivity";
     private EditText nomeTextView;
     private EditText emailTextView;
     private EditText telefoneTextView;
@@ -22,16 +22,20 @@ public class EditUserActivity extends AppCompatActivity {
     private EditText documentoTextView;
     private Button btnSalvar;
     private ClienteDAO clienteDAO;
-    private int clienteId;
+    private long clienteId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
 
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("COLUNA_ID")) {
+            clienteId = getIntent().getLongExtra("COLUNA_ID", -1L);
+        }
+
+        // Inicializando o DAO
         clienteDAO = new ClienteDAO(this);
-        clienteId = getIntent().getIntExtra("COLUNA_ID", -1);
-        Log.d(TAG, "ID do cliente recebido: " + clienteId);
 
         nomeTextView = findViewById(R.id.editNome);
         emailTextView = findViewById(R.id.editEmail);
@@ -51,8 +55,7 @@ public class EditUserActivity extends AppCompatActivity {
         });
     }
 
-    private void loadClientData(int clienteId) {
-        Log.d(TAG, "Carregando dados do cliente com ID: " + clienteId);
+    private void loadClientData(long clienteId) {
         ClientesModel cliente = clienteDAO.getById(clienteId);
         if (cliente != null) {
             nomeTextView.setText(cliente.getNome());
@@ -61,12 +64,11 @@ public class EditUserActivity extends AppCompatActivity {
             enderecoTextView.setText(cliente.getEndereco());
             numeroTextView.setText(String.valueOf(cliente.getNumero()));
             documentoTextView.setText(cliente.getDocumento());
-            Log.d(TAG, "Dados do cliente carregados: " + cliente.toString());
         } else {
-            Log.e(TAG, "Cliente não encontrado com ID: " + clienteId);
             Toast.makeText(this, "Cliente não encontrado.", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void saveClientData() {
         String nome = nomeTextView.getText().toString();
@@ -83,19 +85,20 @@ public class EditUserActivity extends AppCompatActivity {
 
         try {
             ClientesModel cliente = new ClientesModel(clienteId, nome, email, telefone, endereco, Integer.parseInt(numero), documento);
-            long result = clienteDAO.update(cliente); // Assuming you have an update method in ClienteDAO
+            long result = clienteDAO.update(cliente);
 
             if (result != -1) {
                 Toast.makeText(this, "Cliente atualizado com sucesso!", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Cliente atualizado com sucesso: " + cliente.toString()); // Logando sucesso
-                finish(); // Close the activity after saving
+                Intent intent = new Intent(EditUserActivity.this, ClientesActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
             } else {
-                Log.e(TAG, "Erro ao atualizar cliente."); // Logando erro de atualização
                 Toast.makeText(this, "Erro ao atualizar cliente. Tente novamente.", Toast.LENGTH_SHORT).show();
             }
         } catch (NumberFormatException e) {
-            Log.e(TAG, "Erro ao converter o número: " + e.getMessage()); // Logando erro de conversão
             Toast.makeText(this, "Erro ao converter o número. Verifique o valor.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

@@ -175,4 +175,18 @@ public class ClienteDAO extends AbstrataDAO {
         }
         return result;
     }
+
+    public long delete(long id) {
+        long result = -1;
+        try {
+            Open();
+            String whereClause = ClientesModel.COLUNA_ID + " = ?";
+            String[] whereArgs = { String.valueOf(id) };
+
+            result = db.delete(ClientesModel.TABLE_NAME, whereClause, whereArgs);
+        } finally {
+            Close();
+        }
+        return result; // Return the result of the deletion
+    }
 }

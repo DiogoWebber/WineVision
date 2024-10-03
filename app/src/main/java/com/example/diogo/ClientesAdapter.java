@@ -1,6 +1,8 @@
 package com.example.diogo;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.diogo.database.dao.ClienteDAO;
 import com.example.diogo.database.model.ClientesModel;
 
 import java.util.List;
@@ -47,7 +50,6 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
                 if (cliente != null) {
                     Intent intent = new Intent(context, EditUserActivity.class);
                     intent.putExtra("COLUNA_ID", cliente.getId());
-                    Log.d("ClientesAdapter", "ID do Cliente: " + cliente.getId());
                     context.startActivity(intent);
                 } else {
                     Toast.makeText(context, "Cliente não encontrado.", Toast.LENGTH_SHORT).show();
@@ -58,9 +60,38 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (cliente != null) {
+                    // Criar um AlertDialog para confirmação
+                    new AlertDialog.Builder(context)
+                            .setTitle("Excluir Cliente")
+                            .setMessage("Você tem certeza que deseja excluir este cliente?")
+                            .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Chamar o método delete do ClienteDAO
+                                    ClienteDAO clienteDAO = new ClienteDAO(context);
+                                    long result = clienteDAO.delete(cliente.getId());
+
+                                    if (result != -1) {
+                                        Toast.makeText(context, "Cliente excluído com sucesso!", Toast.LENGTH_SHORT).show();
+
+                                        if (context instanceof ClientesActivity) { // Supondo que sua Activity principal é MainActivity
+                                            ((ClientesActivity) context).refreshClientes();
+                                        }
+                                    } else {
+                                        Toast.makeText(context, "Erro ao excluir cliente. Tente novamente.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            })
+                            .setNegativeButton("Não", null)
+                            .show();
+                } else {
+                    Toast.makeText(context, "Cliente não encontrado.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -82,5 +113,11 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
             editButton = itemView.findViewById(R.id.imageViewEdit);
             deleteButton = itemView.findViewById(R.id.imageViewDelete);
         }
+    }
+
+    public void updateClientes(List<ClientesModel> novosClientes) {
+        this.clientesList.clear();
+        this.clientesList.addAll(novosClientes);
+        notifyDataSetChanged();
     }
 }
