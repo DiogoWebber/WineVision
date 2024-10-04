@@ -42,9 +42,10 @@ public class VinhosAdapter extends RecyclerView.Adapter<VinhosAdapter.VinhoViewH
     public void onBindViewHolder(@NonNull VinhoViewHolder holder, int position) {
         VinhosModel vinho = vinhosList.get(position);
         holder.nomeTextView.setText(vinho.getNome());
-        holder.tipoTextView.setText(vinho.getTipo());
-        holder.anoTextView.setText(String.valueOf(vinho.getSafra()));
-        holder.precoTextView.setText(String.format("R$ %.2f", vinho.getPreco()));
+        holder.tipoTextView.setText("Tipo: " + vinho.getTipo());
+        holder.anoTextView.setText("Ano: " + String.valueOf(vinho.getSafra()));
+        holder.estoqueTextView.setText("Disponiveis: " + String.valueOf(vinho.getEstoque()));
+        holder.precoTextView.setText(String.format("Preço: R$ %.2f", vinho.getPreco()));
 
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +101,7 @@ public class VinhosAdapter extends RecyclerView.Adapter<VinhosAdapter.VinhoViewH
         TextView tipoTextView;
         TextView anoTextView;
         TextView precoTextView;
+        TextView estoqueTextView;
         ImageView editButton;
         ImageView deleteButton;
 
@@ -108,6 +110,7 @@ public class VinhosAdapter extends RecyclerView.Adapter<VinhosAdapter.VinhoViewH
             nomeTextView = itemView.findViewById(R.id.textViewNomeVinho);
             tipoTextView = itemView.findViewById(R.id.textViewTipoVinho);
             anoTextView = itemView.findViewById(R.id.textViewSafra);
+            estoqueTextView = itemView.findViewById(R.id.textViewEstoque);
             precoTextView = itemView.findViewById(R.id.textViewPrecoVinho);
             editButton = itemView.findViewById(R.id.imageViewEdit);
             deleteButton = itemView.findViewById(R.id.imageViewDelete);
