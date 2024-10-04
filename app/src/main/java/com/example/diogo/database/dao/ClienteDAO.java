@@ -29,7 +29,7 @@ public class ClienteDAO extends AbstrataDAO {
             values.put(ClientesModel.COLUNA_NUMERO, cliente.getNumero());
             values.put(ClientesModel.COLUNA_DOCUMENTO, cliente.getDocumento());
 
-            result = db.insert(ClientesModel.TABLE_NAME, null, values);  // Armazenar o resultado da inserção
+            result = db.insert(ClientesModel.TABLE_NAME, null, values);
         } finally {
             Close();
         }
@@ -99,7 +99,7 @@ public class ClienteDAO extends AbstrataDAO {
             Close();
         }
 
-        return clientesList; // Retorna a lista de clientes
+        return clientesList;
     }
     public ClientesModel getById(long id) {
         ClientesModel cliente = null;

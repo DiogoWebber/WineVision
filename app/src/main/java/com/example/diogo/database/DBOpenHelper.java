@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.diogo.database.model.ClientesModel;
+import com.example.diogo.database.model.VendasModel;
+import com.example.diogo.database.model.VinhosModel;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
@@ -17,7 +19,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(ClientesModel.CREATE_TABLE);
-
+        db.execSQL(VendasModel.CREATE_TABLE);
+        db.execSQL(VinhosModel.CREATE_TABLE);
     }
 
     @Override

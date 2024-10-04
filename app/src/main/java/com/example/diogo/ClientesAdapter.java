@@ -67,14 +67,14 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
                             .setMessage("Você tem certeza que deseja excluir este cliente?")
                             .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    // Chamar o método delete do ClienteDAO
+
                                     ClienteDAO clienteDAO = new ClienteDAO(context);
                                     long result = clienteDAO.delete(cliente.getId());
 
                                     if (result != -1) {
                                         Toast.makeText(context, "Cliente excluído com sucesso!", Toast.LENGTH_SHORT).show();
 
-                                        if (context instanceof ClientesActivity) { // Supondo que sua Activity principal é MainActivity
+                                        if (context instanceof ClientesActivity) {
                                             ((ClientesActivity) context).refreshClientes();
                                         }
                                     } else {

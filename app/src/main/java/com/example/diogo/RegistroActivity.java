@@ -37,7 +37,6 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        // Inicializar os campos
         editNome = findViewById(R.id.editNome);
         editEmail = findViewById(R.id.editEmail);
         editTelefone = findViewById(R.id.editTelefone);

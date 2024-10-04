@@ -42,8 +42,12 @@ public class MainActivity extends AppCompatActivity { // Extende AppCompatActivi
         });
 
         TextView viewVinhos = findViewById(R.id.viewVinhos);
-        viewVinhos.setOnClickListener(v -> {
-            // Ação para o clique no "VINHOS"
+        viewVinhos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, VinhosActivity.class);
+                startActivity(intent);
+            }
         });
 
         TextView viewVendas = findViewById(R.id.viewVendas);

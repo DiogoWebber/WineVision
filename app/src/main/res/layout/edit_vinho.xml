@@ -1,0 +1,122 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:paddingTop="20dp">
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/editVinho"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Dados do Vinho"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/garamond"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginTop="20dp">
+
+                <!-- Nome do Vinho -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="NOME DO VINHO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"
+                    android:fontFamily="@font/garamond"/>
+                <EditText
+                    android:id="@+id/editNomeVinho"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/garamond"/>
+
+                <!-- Tipo do Vinho -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="TIPO DE VINHO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"
+                    android:fontFamily="@font/garamond"/>
+                <EditText
+                    android:id="@+id/editTipoVinho"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/garamond"/>
+
+                <!-- Ano do Vinho -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="ANO DO VINHO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"
+                    android:fontFamily="@font/garamond"/>
+                <EditText
+                    android:id="@+id/editAnoVinho"
+                    android:inputType="number"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/garamond"/>
+
+                <!-- Preço -->
+                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="PREÇO"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"
+                    android:fontFamily="@font/garamond"/>
+                <EditText
+                    android:id="@+id/editPrecoVinho"
+                    android:inputType="numberDecimal"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/garamond"/>
+
+                <Button
+                    android:id="@+id/btnSalvarVinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/cinza"
+                    android:text="SALVAR"
+                    android:fontFamily="@font/garamond"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
