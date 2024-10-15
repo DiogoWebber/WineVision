@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity { // Extende AppCompatActivity
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity { // Extende AppCompatActivi
             getWindow().setStatusBarColor(getResources().getColor(R.color.vinho));
         }
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this); // Habilita a funcionalidade EdgeToEdge
-        setContentView(R.layout.activity_main); // Define o layout da atividade
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
 
         Button btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity { // Extende AppCompatActivi
                 logout();
             }
         });
-        // Inicializa os TextViews e define os listeners de clique
+
         TextView viewClientes = findViewById(R.id.viewClientes);
         viewClientes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,9 +51,14 @@ public class MainActivity extends AppCompatActivity { // Extende AppCompatActivi
         });
 
         TextView viewVendas = findViewById(R.id.viewVendas);
-        viewVendas.setOnClickListener(v -> {
-            // Ação para o clique no "VENDAS"
+        viewVendas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegistroVendaActivity.class);
+                startActivity(intent);
+            }
         });
+
 
         TextView viewRelatorioMensal = findViewById(R.id.viewRelatorioMensal);
         viewRelatorioMensal.setOnClickListener(v -> {
@@ -65,14 +70,14 @@ public class MainActivity extends AppCompatActivity { // Extende AppCompatActivi
     private void limparSharedPreferences() {
         SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferencias.edit();
-        editor.clear(); // Limpa todas as preferências
-        editor.apply(); // Ou use commit() se precisar de uma confirmação imediata
+        editor.clear();
+        editor.apply();
     }
     private void logout() {
         limparSharedPreferences();
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("isAuthenticated", false); // Define o estado como não autenticado
+        editor.putBoolean("isAuthenticated", false);
         editor.apply();
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);

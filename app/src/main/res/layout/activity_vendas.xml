@@ -1,6 +1,110 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:paddingTop="20dp"
+    >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/RegistroVendaActivity"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="Registro de Vendas"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/garamond"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginTop="20dp">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="SELECIONE O CLIENTE  "
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"
+                    android:fontFamily="@font/garamond"/>
+
+                <Spinner
+                    android:id="@+id/spinnerCliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/garamond" />
+
+                <TextView
+                    android:id="@+id/btnSelecionarVinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="SELECIONE O(OS) VINHO(S)"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"
+                    android:fontFamily="@font/garamond"/>
+
+
+                <Spinner
+                    android:id="@+id/spinnerVinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/garamond"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="DATA QUE A VENDA FOI EFETUADA"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:paddingEnd="40dp"
+                    android:fontFamily="@font/garamond"/>
+
+                <EditText
+                    android:id="@+id/editDataVenda"
+                    android:hint="dd/mm/aaaa"
+                    android:inputType="date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/garamond"/>
+
+
+                <Button
+                    android:id="@+id/btnRegistrarVenda"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="REGISTRAR VENDA"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/cinza"
+                    android:fontFamily="@font/garamond"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -79,7 +79,7 @@ public class EditUserActivity extends AppCompatActivity {
         String documento = documentoTextView.getText().toString();
 
         if (TextUtils.isEmpty(nome) || TextUtils.isEmpty(email) || TextUtils.isEmpty(telefone)) {
-            Toast.makeText(this, "Por favor, preencha todos os campos obrigatórios.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Por favor, prencha todos os campos obrigatórios.", Toast.LENGTH_SHORT).show();
             return;
         }
 

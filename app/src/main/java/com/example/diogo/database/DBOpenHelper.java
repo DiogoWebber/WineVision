@@ -10,21 +10,26 @@ import com.example.diogo.database.model.VinhosModel;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_MAME ="banco.db";
-    private static final int DATABASE_VERSION =1;
+    private static final String DATABASE_NAME = "banco.db";
+    private static final int DATABASE_VERSION = 1;
 
-    public DBOpenHelper(Context context){
-        super(context, DATABASE_MAME, null, DATABASE_VERSION);
+    public DBOpenHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(ClientesModel.CREATE_TABLE);
-        db.execSQL(VendasModel.CREATE_TABLE);
-        db.execSQL(VinhosModel.CREATE_TABLE);
+        db.execSQL(ClientesModel.CREATE_TABLE);  // Criar tabela de clientes
+        db.execSQL(VendasModel.CREATE_TABLE);    // Criar tabela de vendas
+        db.execSQL(VinhosModel.CREATE_TABLE);    // Criar tabela de vinhos
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Atualizar o banco de dados se necessário
+        db.execSQL("DROP TABLE IF EXISTS " + ClientesModel.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + VendasModel.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + VinhosModel.TABLE_NAME);
+        onCreate(db);
     }
 }

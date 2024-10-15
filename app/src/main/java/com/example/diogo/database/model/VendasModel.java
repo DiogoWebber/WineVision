@@ -2,84 +2,72 @@ package com.example.diogo.database.model;
 
 public class VendasModel {
 
-    // Nome da tabela e colunas
-    public static final String TABLE_NAME = "tb_vendas";
+    public static final String TABLE_NAME = "vendas";
 
-    public static final String COLUNA_ID = "_id";
-    public static final String COLUNA_CLIENTE_ID = "cliente_id";
-    public static final String COLUNA_VINHO_ID = "vinho_id";
-
-    public static final String COLUNA_QUANTIDADE = "quantidade";
-    public static final String COLUNA_DATA_VENDA = "data_venda";
-    public static final String COLUNA_TOTAL = "total";
-
-    private long id;
-    private long clienteId;
-    private long vinhoId;
-    private int quantidade;
-    private String dataVenda;
-    private double total;
+    // Colunas da tabela
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_CLIENTE = "cliente";
+    public static final String COLUMN_VINHO = "vinho";
+    public static final String COLUMN_DATA_VENDA = "data_venda";
+    public static final String COLUMN_QUANTIDADE = "quantidade";
 
     // SQL para criar a tabela
-    public static String CREATE_TABLE =
+    public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + " (" +
-                    COLUNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COLUNA_CLIENTE_ID + " INTEGER NOT NULL, " +
-                    COLUNA_VINHO_ID + " INTEGER NOT NULL, " +
-                    COLUNA_QUANTIDADE + " INTEGER NOT NULL, " +
-                    COLUNA_DATA_VENDA + " TEXT NOT NULL, " +
-                    COLUNA_TOTAL + " REAL NOT NULL, " +
-                    "FOREIGN KEY(" + COLUNA_CLIENTE_ID + ") REFERENCES " + ClientesModel.TABLE_NAME + "(" + ClientesModel.COLUNA_ID + "), " +
-                    "FOREIGN KEY(" + COLUNA_VINHO_ID + ") REFERENCES " + VinhosModel.TABLE_NAME + "(" + VinhosModel.COLUNA_ID + ")" + ");";
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    COLUMN_CLIENTE + " TEXT," +
+                    COLUMN_VINHO + " TEXT," +
+                    COLUMN_DATA_VENDA + " TEXT," +
+                    COLUMN_QUANTIDADE + " INTEGER)";
 
-    // SQL para deletar a tabela
-    public static String DROP_TABLE =
-            "DROP TABLE IF EXISTS " + TABLE_NAME;
+    // Atributos
+    private int id;
+    private String cliente;
+    private String vinho;
+    private String dataVenda;
+    private int quantidade;
 
-    public VendasModel() {
-    }
+    // Construtores
+    public VendasModel() {}
 
-    public VendasModel(long id, long clienteId, long vinhoId, int quantidade, String dataVenda, double total) {
-        this.id = id;
-        this.clienteId = clienteId;
-        this.vinhoId = vinhoId;
-        this.quantidade = quantidade;
+    public VendasModel(String cliente, String vinho, String dataVenda, int quantidade) {
+        this.cliente = cliente;
+        this.vinho = vinho;
         this.dataVenda = dataVenda;
-        this.total = total;
+        this.quantidade = quantidade;
     }
 
-    // Getters e Setters
+    public VendasModel(int id, String cliente, String vinho, String dataVenda, int quantidade) {
+        this.id = id;
+        this.cliente = cliente;
+        this.vinho = vinho;
+        this.dataVenda = dataVenda;
+        this.quantidade = quantidade;
+    }
 
-    public long getId() {
+    // Getters e setters
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public long getClienteId() {
-        return clienteId;
+    public String getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(long clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
-    public long getVinhoId() {
-        return vinhoId;
+    public String getVinho() {
+        return vinho;
     }
 
-    public void setVinhoId(long vinhoId) {
-        this.vinhoId = vinhoId;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setVinho(String vinho) {
+        this.vinho = vinho;
     }
 
     public String getDataVenda() {
@@ -90,11 +78,11 @@ public class VendasModel {
         this.dataVenda = dataVenda;
     }
 
-    public double getTotal() {
-        return total;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 }

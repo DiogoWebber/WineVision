@@ -27,11 +27,12 @@
         </activity>
         <activity android:name=".RegistroActivity"></activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ClientesActivity" />
-        <activity android:name=".RegistroVinhosActivity" />
-        <activity android:name=".EditUserActivity" />
-        <activity android:name=".VinhosActivity" />
-        <activity android:name=".EditVinhoActivity" />
+        <activity android:name=".ClientesActivity"></activity>
+        <activity android:name=".RegistroVinhosActivity"> </activity>
+        <activity android:name=".EditUserActivity"> </activity>
+        <activity android:name=".VinhosActivity"> </activity>
+        <activity android:name=".EditVinhoActivity" > </activity>
+        <activity android:name=".RegistroVendaActivity" > </activity>
 
     </application>
 

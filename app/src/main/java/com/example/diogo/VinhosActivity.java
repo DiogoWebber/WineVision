@@ -65,4 +65,3 @@ public class VinhosActivity extends AppCompatActivity {
         }
     }
 }
-

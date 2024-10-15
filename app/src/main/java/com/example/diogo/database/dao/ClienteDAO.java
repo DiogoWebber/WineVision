@@ -189,4 +189,38 @@ public class ClienteDAO extends AbstrataDAO {
         }
         return result; // Return the result of the deletion
     }
+
+    public List<String> getAllClientesNames() {
+        List<String> clientesNomes = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            Open();
+
+            // Seleciona apenas a coluna dos nomes dos clientes
+            String[] colunas = {ClientesModel.COLUNA_CLIENTE};
+
+            // Consulta para buscar apenas os nomes dos clientes
+            cursor = db.query(ClientesModel.TABLE_NAME, colunas, null, null, null, null, null);
+
+            // Itera sobre o cursor e adiciona os nomes na lista
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    int nomeIndex = cursor.getColumnIndex(ClientesModel.COLUNA_CLIENTE);
+                    if (nomeIndex != -1) {
+                        String nome = cursor.getString(nomeIndex);
+                        clientesNomes.add(nome);
+                    }
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close(); // Fecha o cursor para evitar vazamento de memória
+            }
+            Close();
+        }
+
+        return clientesNomes;
+    }
+
 }

@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fundo"
     android:gravity="center"
+    android:orientation="vertical"
     android:paddingTop="100dp">
 
     <LinearLayout
@@ -16,87 +17,82 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="Nome"
-            android:textColor="@color/white"
-            android:textSize="25sp"
+            android:fontFamily="@font/garamond"
             android:paddingStart="40dp"
             android:paddingEnd="40dp"
-            android:fontFamily="@font/garamond"
-            />
+            android:text="Nome"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/editLoginAcesso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Digite seu nome"
-            android:textColorHint="@color/white"
             android:layout_gravity="center"
-            android:padding="15dp"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/rounded_edittext"
-            android:fontFamily="@font/garamond" />
+            android:fontFamily="@font/garamond"
+            android:hint="Digite seu nome"
+            android:padding="15dp"
+            android:textColorHint="@color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="2dp"
-            android:text="Senha"
-            android:textColor="@color/white"
-            android:textSize="25sp"
+            android:fontFamily="@font/garamond"
             android:paddingStart="40dp"
             android:paddingEnd="40dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/garamond"
-            />
+            android:text="Senha"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/editSenhaAcesso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Digite sua senha"
-            android:textColorHint="@color/white"
-            android:inputType="textPassword"
             android:layout_gravity="center"
-            android:padding="15dp"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="40dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="40dp"
             android:background="@drawable/rounded_edittext"
-            android:fontFamily="@font/garamond" />
+            android:fontFamily="@font/garamond"
+            android:hint="Digite sua senha"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textColorHint="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="20dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btnEntrar"
                 android:layout_width="340dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/cinza"
+                android:fontFamily="@font/garamond"
                 android:text="ENTRAR"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:backgroundTint="@color/cinza"
-                android:layout_gravity="center"
-                android:fontFamily="@font/garamond"
-                />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Esqueceu sua senha?"
-                android:textSize="17sp"
-                android:textStyle="normal"
-                android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:fontFamily="@font/garamond"
-                />
-
+                android:text="Esqueceu sua senha?"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="normal" />
 
 
         </LinearLayout>

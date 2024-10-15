@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@color/vinho">
+
+    <TextView
+        android:id="@+id/nomeVinhoDialog"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nome do Vinho"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/quantidadeDisponivel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disponível: 10"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/quantidadeSelecionada"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Qtd"
+        android:textColor="@android:color/white"
+        android:background="@color/vinho"
+        android:padding="8dp" />
+</LinearLayout>
