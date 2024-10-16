@@ -11,7 +11,7 @@ import com.example.diogo.database.model.VinhosModel;
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "banco.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     public DBOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -19,9 +19,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(ClientesModel.CREATE_TABLE);  // Criar tabela de clientes
-        db.execSQL(VendasModel.CREATE_TABLE);    // Criar tabela de vendas
-        db.execSQL(VinhosModel.CREATE_TABLE);    // Criar tabela de vinhos
+        db.execSQL(ClientesModel.CREATE_TABLE);
+        db.execSQL(VendasModel.CREATE_TABLE);
+        db.execSQL(VinhosModel.CREATE_TABLE);
     }
 
     @Override

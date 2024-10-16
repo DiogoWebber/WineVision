@@ -2,7 +2,7 @@ package com.example.diogo.database.model;
 
 public class VendasModel {
 
-    public static final String TABLE_NAME = "vendas";
+    public static final String TABLE_NAME = "tb_vendas";
 
     // Colunas da tabela
     public static final String COLUMN_ID = "id";

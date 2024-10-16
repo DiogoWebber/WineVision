@@ -33,6 +33,7 @@
         <activity android:name=".VinhosActivity"> </activity>
         <activity android:name=".EditVinhoActivity" > </activity>
         <activity android:name=".RegistroVendaActivity" > </activity>
+        <activity android:name=".VendasActivity" > </activity>
 
     </application>
 

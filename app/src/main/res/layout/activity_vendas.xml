@@ -88,7 +88,7 @@
                 <EditText
                     android:id="@+id/editDataVenda"
                     android:hint="dd/mm/aaaa"
-                    android:inputType="date"
+                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
@@ -97,7 +97,7 @@
 
 
                 <Button
-                    android:id="@+id/btnRegistrarVenda"
+                    android:id="@+id/btnRegistrar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="REGISTRAR VENDA"

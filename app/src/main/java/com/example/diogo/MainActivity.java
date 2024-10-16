@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         viewVendas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegistroVendaActivity.class);
+                Intent intent = new Intent(MainActivity.this, VendasActivity.class);
                 startActivity(intent);
             }
         });
