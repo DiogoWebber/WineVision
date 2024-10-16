@@ -41,9 +41,10 @@ public class VinhosAdapter extends RecyclerView.Adapter<VinhosAdapter.VinhoViewH
     @Override
     public void onBindViewHolder(@NonNull VinhoViewHolder holder, int position) {
         VinhosModel vinho = vinhosList.get(position);
-        holder.nomeTextView.setText(vinho.getNome());
+        holder.nomeTextView.setText("Nome: " +vinho.getNome());
         holder.tipoTextView.setText("Tipo: " + vinho.getTipo());
         holder.anoTextView.setText("Ano: " + String.valueOf(vinho.getSafra()));
+        holder.paisTextView.setText("País: " + String.valueOf(vinho.getPaisOrigem()));
         holder.estoqueTextView.setText("Disponiveis: " + String.valueOf(vinho.getEstoque()));
         holder.precoTextView.setText(String.format("Preço: R$ %.2f", vinho.getPreco()));
 
@@ -102,6 +103,7 @@ public class VinhosAdapter extends RecyclerView.Adapter<VinhosAdapter.VinhoViewH
         TextView anoTextView;
         TextView precoTextView;
         TextView estoqueTextView;
+        TextView paisTextView; // New TextView for País de origem
         ImageView editButton;
         ImageView deleteButton;
 
@@ -112,10 +114,12 @@ public class VinhosAdapter extends RecyclerView.Adapter<VinhosAdapter.VinhoViewH
             anoTextView = itemView.findViewById(R.id.textViewSafra);
             estoqueTextView = itemView.findViewById(R.id.textViewEstoque);
             precoTextView = itemView.findViewById(R.id.textViewPrecoVinho);
+            paisTextView = itemView.findViewById(R.id.textViewPais); // Initialize the new TextView
             editButton = itemView.findViewById(R.id.imageViewEdit);
             deleteButton = itemView.findViewById(R.id.imageViewDelete);
         }
     }
+
     public void updateVinhos(List<VinhosModel> novosVinhos) {
         this.vinhosList.clear();
         this.vinhosList.addAll(novosVinhos);

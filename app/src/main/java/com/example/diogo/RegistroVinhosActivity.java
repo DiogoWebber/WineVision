@@ -1,5 +1,6 @@
 package com.example.diogo;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,6 +27,10 @@ public class RegistroVinhosActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.vinho));
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vinhos);
 

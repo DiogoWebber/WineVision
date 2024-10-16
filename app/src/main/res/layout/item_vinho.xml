@@ -41,15 +41,15 @@
                     android:id="@+id/imageViewEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/edit" />
 
                 <ImageView
                     android:id="@+id/imageViewDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/delete" />
             </LinearLayout>
         </LinearLayout>
@@ -71,7 +71,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/textViewPaisOrigem"
+            android:id="@+id/textViewPais"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="0dp"

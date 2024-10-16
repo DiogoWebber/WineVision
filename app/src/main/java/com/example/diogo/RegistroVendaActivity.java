@@ -3,6 +3,7 @@ package com.example.diogo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,6 +33,9 @@ public class RegistroVendaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.vinho));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendas);
 

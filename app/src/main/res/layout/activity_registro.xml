@@ -50,7 +50,7 @@
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editNome"
-                    android:hint="Débora Figueiredo"
+                    android:hint="Digite o seu Nome"
                     android:inputType="text"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
@@ -69,7 +69,7 @@
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editEmail"
-                    android:hint="E-mail"
+                    android:hint="Digite seu E-mail"
                     android:inputType="textEmailAddress"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
@@ -88,7 +88,7 @@
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editTelefone"
-                    android:hint="+55 (48) 998212367"
+                    android:hint="+00 (00) 000000000"
                     android:inputType="text|number"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
@@ -107,7 +107,7 @@
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editEndereco"
-                    android:hint="Rua Exemplo"
+                    android:hint="Digite seu Endereco Completo"
                     android:inputType="text"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
@@ -119,14 +119,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="NÚMERO"
+                    android:text="CEP"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:paddingEnd="40dp"
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editNumero"
-                    android:hint="123"
+                    android:hint="Digite seu CEP"
                     android:inputType="number"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"

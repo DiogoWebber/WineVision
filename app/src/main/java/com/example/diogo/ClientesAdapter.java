@@ -40,9 +40,9 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.Client
     @Override
     public void onBindViewHolder(@NonNull ClienteViewHolder holder, int position) {
         ClientesModel cliente = clientesList.get(position);
-        holder.nomeTextView.setText(cliente.getNome());
-        holder.emailTextView.setText(cliente.getEmail());
-        holder.telefoneTextView.setText(cliente.getTelefone());
+        holder.nomeTextView.setText("Nome: " +cliente.getNome());
+        holder.emailTextView.setText("Email: " +cliente.getEmail());
+        holder.telefoneTextView.setText("Telefone: " +cliente.getTelefone());
 
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override

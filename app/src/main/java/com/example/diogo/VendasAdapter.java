@@ -35,10 +35,10 @@ public class VendasAdapter extends RecyclerView.Adapter<VendasAdapter.VendaViewH
         VendasModel venda = vendasList.get(position);
 
         // Preenchendo os dados da venda no layout
-        holder.clienteTextView.setText(venda.getCliente());
-        holder.vinhoTextView.setText(venda.getVinho());
-        holder.dataVendaTextView.setText(venda.getDataVenda());
-        holder.quantidadeTextView.setText("Quantidade: " + venda.getQuantidade());
+        holder.clienteTextView.setText("Nome Cliente: " + venda.getCliente());
+        holder.vinhoTextView.setText("Nome Vinho: " +venda.getVinho());
+        holder.dataVendaTextView.setText("Data Venda: " +venda.getDataVenda());
+        holder.quantidadeTextView.setText("Quantidade Vendidos: " + venda.getQuantidade());
     }
 
     @Override
