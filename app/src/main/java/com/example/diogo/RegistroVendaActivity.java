@@ -1,6 +1,7 @@
 package com.example.diogo;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -9,8 +10,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +23,7 @@ import com.example.diogo.database.dao.VinhoDAO;
 import com.example.diogo.database.model.VendasModel;
 import com.example.diogo.database.model.VinhosModel;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -41,7 +45,7 @@ public class RegistroVendaActivity extends AppCompatActivity {
 
         spinnerCliente = findViewById(R.id.spinnerCliente);
         spinnerVinho = findViewById(R.id.spinnerVinho);
-        editDataVenda = findViewById(R.id.editDataVenda);
+        TextView textDataVenda = findViewById(R.id.textDataVenda);
 
         clienteDAO = new ClienteDAO(this);
         vinhoDAO = new VinhoDAO(this);
@@ -49,6 +53,31 @@ public class RegistroVendaActivity extends AppCompatActivity {
 
         loadSpinners();
 
+        textDataVenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Obtenha a data atual como valor padrão
+                final Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                // Abra o DatePickerDialog
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        RegistroVendaActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                // Formatar a data e mostrar no TextView
+                                String selectedDate = String.format("%02d/%02d/%d", dayOfMonth, month + 1, year);
+                                textDataVenda.setText(selectedDate);
+                            }
+                        },
+                        year, month, day);
+
+                datePickerDialog.show();
+            }
+        });
         spinnerCliente.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

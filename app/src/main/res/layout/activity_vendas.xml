@@ -85,15 +85,19 @@
                     android:paddingEnd="40dp"
                     android:fontFamily="@font/garamond"/>
 
-                <EditText
-                    android:id="@+id/editDataVenda"
+                <TextView
+                    android:id="@+id/textDataVenda"
                     android:hint="dd/mm/aaaa"
-                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
                     android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/garamond"/>
+                    android:fontFamily="@font/garamond"
+                    android:padding="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:clickable="true"
+                    android:focusable="true"/>
 
 
                 <Button
