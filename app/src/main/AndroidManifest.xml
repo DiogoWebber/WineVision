@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_icone_red"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -25,15 +25,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistroActivity"></activity>
+        <activity android:name=".clientes.RegistroActivity"></activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ClientesActivity"></activity>
-        <activity android:name=".RegistroVinhosActivity"> </activity>
-        <activity android:name=".EditUserActivity"> </activity>
-        <activity android:name=".VinhosActivity"> </activity>
-        <activity android:name=".EditVinhoActivity" > </activity>
-        <activity android:name=".RegistroVendaActivity" > </activity>
-        <activity android:name=".VendasActivity" > </activity>
+        <activity android:name=".clientes.ClientesActivity"></activity>
+        <activity android:name=".vinhos.RegistroVinhosActivity"> </activity>
+        <activity android:name=".clientes.EditUserActivity"> </activity>
+        <activity android:name=".vinhos.VinhosActivity"> </activity>
+        <activity android:name=".vinhos.EditVinhoActivity" > </activity>
+        <activity android:name=".vendas.RegistroVendaActivity" > </activity>
+        <activity android:name=".vendas.VendasActivity" > </activity>
 
     </application>
 

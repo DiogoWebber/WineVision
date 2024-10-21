@@ -1,4 +1,4 @@
-package com.example.diogo;
+package com.example.diogo.vendas;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.diogo.R;
 import com.example.diogo.database.model.VinhosModel;
 
 import java.util.HashMap;

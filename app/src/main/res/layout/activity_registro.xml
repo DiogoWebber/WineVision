@@ -3,12 +3,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/background"
     android:gravity="center"
-    android:paddingTop="20dp"
-    >
-
-    <ImageView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+    android:paddingTop="20dp">
 
     <ScrollView
         android:layout_height="match_parent"
@@ -88,8 +83,8 @@
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editTelefone"
-                    android:hint="+00 (00) 000000000"
-                    android:inputType="text|number"
+                    android:hint="+00 (00) 00000-0000"
+                    android:inputType="phone"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
                     android:layout_width="match_parent"
@@ -126,6 +121,7 @@
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editNumero"
+                    android:maxLength="8"
                     android:hint="Digite seu CEP"
                     android:inputType="number"
                     android:layout_height="wrap_content"

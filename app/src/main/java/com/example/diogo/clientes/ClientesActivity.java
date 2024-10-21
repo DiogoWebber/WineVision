@@ -1,4 +1,4 @@
-package com.example.diogo;
+package com.example.diogo.clientes;
 
 import android.content.Intent;
 import android.os.Build;
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.diogo.R;
 import com.example.diogo.database.dao.ClienteDAO;
 import com.example.diogo.database.model.ClientesModel;
 

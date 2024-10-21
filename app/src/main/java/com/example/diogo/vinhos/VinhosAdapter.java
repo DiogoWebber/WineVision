@@ -1,10 +1,9 @@
-package com.example.diogo;
+package com.example.diogo.vinhos;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.diogo.R;
 import com.example.diogo.database.dao.VinhoDAO;
-import com.example.diogo.database.model.ClientesModel;
 import com.example.diogo.database.model.VinhosModel;
 
 import java.util.List;

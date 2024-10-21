@@ -1,4 +1,4 @@
-package com.example.diogo;
+package com.example.diogo.vinhos;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.diogo.R;
 import com.example.diogo.database.dao.VinhoDAO;
 import com.example.diogo.database.model.VinhosModel;
 

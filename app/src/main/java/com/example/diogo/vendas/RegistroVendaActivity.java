@@ -1,9 +1,7 @@
-package com.example.diogo;
-import java.sql.Date;
+package com.example.diogo.vendas;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -13,10 +11,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.diogo.R;
 import com.example.diogo.database.dao.ClienteDAO;
 import com.example.diogo.database.dao.VendasDAO;
 import com.example.diogo.database.dao.VinhoDAO;

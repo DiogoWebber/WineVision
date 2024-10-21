@@ -1,7 +1,7 @@
-package com.example.diogo;
+package com.example.diogo.clientes;
 
-import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.diogo.R;
 import com.example.diogo.database.dao.ClienteDAO;
 import com.example.diogo.database.model.ClientesModel;
 
@@ -26,6 +28,9 @@ public class EditUserActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.vinho));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
 

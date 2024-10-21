@@ -13,6 +13,10 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.diogo.clientes.ClientesActivity;
+import com.example.diogo.vendas.VendasActivity;
+import com.example.diogo.vinhos.VinhosActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

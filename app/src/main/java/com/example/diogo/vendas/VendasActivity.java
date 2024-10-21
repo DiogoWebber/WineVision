@@ -1,4 +1,4 @@
-package com.example.diogo;
+package com.example.diogo.vendas;
 
 import android.content.Intent;
 import android.os.Build;
@@ -8,6 +8,8 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.diogo.R;
 import com.example.diogo.database.dao.VendasDAO; // Certifique-se de que você tenha um DAO para vendas
 import com.example.diogo.database.model.VendasModel;
 
