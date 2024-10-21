@@ -222,5 +222,40 @@ public class ClienteDAO extends AbstrataDAO {
 
         return clientesNomes;
     }
+    public int getClientIdByName(String clientName) {
+        int clientId = -1; // Inicializa o ID do cliente como -1 (não encontrado)
+        Cursor cursor = null;
+
+        try {
+            Open();
+            String selection = ClientesModel.COLUNA_CLIENTE + " = ?";
+            String[] selectionArgs = { clientName }; // Argumento para a cláusula WHERE
+
+            // Consulta para buscar o ID do cliente pelo nome
+            cursor = db.query(ClientesModel.TABLE_NAME,
+                    new String[]{ClientesModel.COLUNA_ID}, // Seleciona apenas a coluna ID
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    null);
+
+            // Verifica se o cursor não é nulo e se há resultados
+            if (cursor != null && cursor.moveToFirst()) {
+                int idIndex = cursor.getColumnIndex(ClientesModel.COLUNA_ID);
+                if (idIndex != -1) {
+                    clientId = cursor.getInt(idIndex); // Obtém o ID do cliente
+                }
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close(); // Fecha o cursor para evitar vazamentos de memória
+            }
+            Close();
+        }
+
+        return clientId; // Retorna o ID encontrado ou -1 se não encontrado
+    }
+
 
 }

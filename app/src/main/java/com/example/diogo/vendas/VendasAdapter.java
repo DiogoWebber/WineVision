@@ -40,6 +40,8 @@ public class VendasAdapter extends RecyclerView.Adapter<VendasAdapter.VendaViewH
         holder.vinhoTextView.setText("Nome Vinho: " +venda.getVinho());
         holder.dataVendaTextView.setText("Data Venda: " +venda.getDataVenda());
         holder.quantidadeTextView.setText("Quantidade Vendidos: " + venda.getQuantidade());
+        holder.totalVendaTextView.setText("Total Venda: R$ " + String.format("%.2f", venda.getTotalVenda()));
+
     }
 
     @Override
@@ -52,6 +54,8 @@ public class VendasAdapter extends RecyclerView.Adapter<VendasAdapter.VendaViewH
         TextView vinhoTextView;
         TextView dataVendaTextView;
         TextView quantidadeTextView;
+        TextView totalVendaTextView; // Adicionado
+
 
         public VendaViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +63,8 @@ public class VendasAdapter extends RecyclerView.Adapter<VendasAdapter.VendaViewH
             vinhoTextView = itemView.findViewById(R.id.textViewVinho);
             dataVendaTextView = itemView.findViewById(R.id.textViewDataVenda);
             quantidadeTextView = itemView.findViewById(R.id.textViewQuantidade);
+            totalVendaTextView = itemView.findViewById(R.id.textViewTotalVenda);
+
         }
     }
 

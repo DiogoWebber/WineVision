@@ -89,7 +89,7 @@ public class EditVinhoActivity extends AppCompatActivity {
 
             // Create a new VinhosModel object
             VinhosModel vinho = new VinhosModel(vinhoId, nome, tipo, ano, preco);
-            long result = vinhoDAO.update(vinho); // Update the wine in the DAO
+            long result = vinhoDAO.updateVinho(vinho); // Update the wine in the DAO
 
             // Check if the update was successful
             if (result != -1) {

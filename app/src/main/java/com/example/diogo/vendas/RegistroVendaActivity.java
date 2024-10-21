@@ -1,4 +1,5 @@
 package com.example.diogo.vendas;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.diogo.R;
@@ -29,130 +31,142 @@ import java.util.logging.Logger;
 
 public class RegistroVendaActivity extends AppCompatActivity {
     private static final Logger logger = Logger.getLogger(RegistroVendaActivity.class.getName());
+    private static final String SELECT_VINO_MESSAGE = "Selecione um vinho";
     private Spinner spinnerCliente, spinnerVinho;
     private EditText textDataVenda;
     private ClienteDAO clienteDAO;
     private VinhoDAO vinhoDAO;
     private VendasDAO vendasDAO;
+    private VinhosModel vinhoSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Set status bar color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.vinho));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendas);
 
+        initializeViews();
+        initializeDAOs();
+        loadSpinners();
+
+        textDataVenda.setOnClickListener(v -> showDatePicker());
+        setSpinnerTouchListeners();
+
+        Button btnRegistrar = findViewById(R.id.btnRegistrar);
+        btnRegistrar.setOnClickListener(v -> registrarVenda());
+    }
+
+    private void initializeViews() {
         spinnerCliente = findViewById(R.id.spinnerCliente);
         spinnerVinho = findViewById(R.id.spinnerVinho);
-        textDataVenda = findViewById(R.id.textDataVenda);  // Use the global variable here
+        textDataVenda = findViewById(R.id.textDataVenda);
+    }
 
+    private void initializeDAOs() {
         clienteDAO = new ClienteDAO(this);
         vinhoDAO = new VinhoDAO(this);
         vendasDAO = new VendasDAO(this);
+    }
 
-        loadSpinners();
-
-        textDataVenda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Obtenha a data atual como valor padrão
-                final Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-                // Abra o DatePickerDialog
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        RegistroVendaActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                // Formatar a data e mostrar no TextView
-                                String selectedDate = String.format("%02d/%02d/%d", dayOfMonth, month + 1, year);
-                                textDataVenda.setText(selectedDate);
-                            }
-                        },
-                        year, month, day);
-
-                datePickerDialog.show();
+    private void setSpinnerTouchListeners() {
+        spinnerCliente.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                showClienteDialog();
             }
+            return true;
         });
 
-        spinnerCliente.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    showClienteDialog(); // Exibe o diálogo
-                }
-                return true;
+        spinnerVinho.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                abrirDialogoSelecaoVinho();
             }
-        });
-
-        spinnerVinho.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    abrirDialogoSelecaoVinho();
-                }
-                return true;
-            }
-        });
-
-        Button btnRegistrar = findViewById(R.id.btnRegistrar);
-        btnRegistrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registrarVenda();
-            }
+            return true;
         });
     }
 
+    private void showDatePicker() {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    String selectedDate = String.format("%02d/%02d/%d", selectedDay, selectedMonth + 1, selectedYear);
+                    textDataVenda.setText(selectedDate);
+                },
+                year, month, day);
+        datePickerDialog.show();
+    }
 
     private void registrarVenda() {
         String clienteSelecionado = (String) spinnerCliente.getSelectedItem();
-        String vinhoSelecionado = (String) spinnerVinho.getSelectedItem();
-        String dataVenda = textDataVenda.getText().toString();  // formato dd/MM/yyyy
+        String dataVenda = textDataVenda.getText().toString();
 
-        if (clienteSelecionado != null && vinhoSelecionado != null && !dataVenda.isEmpty()) {
-            try {
-                // Converter a string de data para java.sql.Date
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                java.util.Date utilDate = dateFormat.parse(dataVenda);
-                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
-                // Recupera a quantidade selecionada
-                String[] vinhoInfo = vinhoSelecionado.split(" - ");
-                String nomeVinho = vinhoInfo[0];
-                String quantidadeStr = vinhoInfo[1].replace(" unidades", "");
-                int quantidade = Integer.parseInt(quantidadeStr);
-
-                VendasModel venda = new VendasModel(clienteSelecionado, nomeVinho, sqlDate, quantidade);
-                long id = vendasDAO.insert(venda);
-                boolean vendaRegistrada = id != -1;
-
-                if (vendaRegistrada) {
-                    boolean estoqueAtualizado = vendasDAO.updateVinhoEstoque(nomeVinho, quantidade);
-                    if (estoqueAtualizado) {
-                        Toast.makeText(this, "Venda registrada e estoque atualizado com sucesso!", Toast.LENGTH_SHORT).show();
-                        logger.info("Venda registrada: " + venda);
-                        setResult(RESULT_OK);
-                        finish();
-                    } else {
-                        Toast.makeText(this, "Venda registrada, mas erro ao atualizar estoque.", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(this, "Erro ao registrar venda.", Toast.LENGTH_SHORT).show();
-                    logger.warning("Falha ao registrar venda para o cliente: " + clienteSelecionado + " com vinho: " + nomeVinho);
-                }
-            } catch (ParseException e) {
-                Toast.makeText(this, "Erro ao processar a data.", Toast.LENGTH_SHORT).show();
-                logger.warning("Erro ao converter a data de venda: " + e.getMessage());
-            }
-        } else {
-            Toast.makeText(this, "Selecione um cliente, um vinho e insira uma data válida.", Toast.LENGTH_SHORT).show();
-            logger.warning("Dados inválidos para registro de venda: cliente=" + clienteSelecionado + ", vinho=" + vinhoSelecionado + ", data=" + dataVenda);
+        if (vinhoSelecionado == null || clienteSelecionado == null || dataVenda.isEmpty()) {
+            showToast("Selecione um cliente, um vinho e insira uma data válida.");
+            logger.warning("Dados inválidos para registro de venda: cliente=" + clienteSelecionado + ", data=" + dataVenda);
+            return;
         }
+
+        try {
+            java.sql.Date sqlDate = parseDate(dataVenda);
+            String quantidadeStr = spinnerVinho.getSelectedItem().toString().split(" - ")[1].replace(" unidades", "");
+            int quantidade = Integer.parseInt(quantidadeStr);
+
+            if (quantidade > vinhoSelecionado.getEstoque()) {
+                showToast("Quantidade maior que o estoque disponível.");
+                return;
+            }
+
+            int clientId = clienteDAO.getClientIdByName(clienteSelecionado);
+
+            // Calculate total sale value
+            double totalVenda = calculateTotalVenda(quantidade);
+
+            // Update VendasModel instantiation to include totalVenda
+            VendasModel venda = new VendasModel(clientId, clienteSelecionado, vinhoSelecionado.getNome(), sqlDate, quantidade, totalVenda);
+            long id = vendasDAO.insert(venda); // Insere a venda
+
+            // Atualiza a quantidade do vinho selecionado
+            vinhoSelecionado.setEstoque(vinhoSelecionado.getEstoque() - quantidade); // Subtrai a quantidade vendida
+
+            long result = vinhoDAO.update(vinhoSelecionado); // Atualiza o vinho no banco de dados
+
+            // Verifica se a venda foi registrada e se a atualização do estoque foi bem-sucedida
+            if (id != -1 && result > 0) {
+                showToast("Venda registrada e estoque atualizado com sucesso!");
+                logger.info("Venda registrada: " + venda);
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                showToast("Erro ao registrar venda ou atualizar estoque.");
+            }
+        } catch (ParseException e) {
+            showToast("Erro ao processar a data.");
+            logger.warning("Erro ao converter a data de venda: " + e.getMessage());
+        }
+    }
+
+
+    private double calculateTotalVenda(int quantidade) {
+        return vinhoSelecionado.getPreco() * quantidade; // Ensure getPreco() method exists in VinhosModel
+    }
+
+
+    private java.sql.Date parseDate(String date) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date utilDate = dateFormat.parse(date);
+        return new java.sql.Date(utilDate.getTime());
+    }
+
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void loadSpinners() {
@@ -161,7 +175,7 @@ public class RegistroVendaActivity extends AppCompatActivity {
         clienteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCliente.setAdapter(clienteAdapter);
 
-        ArrayAdapter<String> vinhoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"Selecione um vinho"});
+        ArrayAdapter<String> vinhoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{SELECT_VINO_MESSAGE});
         vinhoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerVinho.setAdapter(vinhoAdapter);
     }
@@ -170,12 +184,7 @@ public class RegistroVendaActivity extends AppCompatActivity {
         List<String> clientes = clienteDAO.getAllClientesNames();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecionar Cliente")
-                .setItems(clientes.toArray(new String[0]), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        spinnerCliente.setSelection(which);
-                    }
-                });
+                .setItems(clientes.toArray(new String[0]), (dialog, which) -> spinnerCliente.setSelection(which));
         builder.create().show();
     }
 
@@ -191,39 +200,37 @@ public class RegistroVendaActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecione o Vinho");
 
-        builder.setItems(vinhosDisponiveis, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, final int whichVinho) {
-                final VinhosModel vinhoSelecionado = vinhosList.get(whichVinho);
-
-                AlertDialog.Builder quantidadeDialog = new AlertDialog.Builder(RegistroVendaActivity.this);
-                quantidadeDialog.setTitle("Quantidade para " + vinhoSelecionado.getNome());
-
-                final EditText inputQuantidade = new EditText(RegistroVendaActivity.this);
-                inputQuantidade.setHint("Máximo: " + vinhoSelecionado.getEstoque());
-                quantidadeDialog.setView(inputQuantidade);
-
-                quantidadeDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String quantidadeStr = inputQuantidade.getText().toString();
-                        if (!quantidadeStr.isEmpty()) {
-                            int quantidadeEscolhida = Integer.parseInt(quantidadeStr);
-                            if (quantidadeEscolhida <= vinhoSelecionado.getEstoque()) {
-                                ArrayAdapter<String> adapter = new ArrayAdapter<>(RegistroVendaActivity.this, android.R.layout.simple_spinner_item, new String[]{vinhoSelecionado.getNome() + " - " + quantidadeEscolhida + " unidades"});
-                                spinnerVinho.setAdapter(adapter);
-                            } else {
-                                Toast.makeText(RegistroVendaActivity.this, "Quantidade maior que o estoque disponível.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                });
-
-                quantidadeDialog.setNegativeButton("Cancelar", null);
-                quantidadeDialog.create().show();
-            }
+        builder.setItems(vinhosDisponiveis, (dialog, which) -> {
+            vinhoSelecionado = vinhosList.get(which);
+            promptForQuantidade(vinhoSelecionado);
         });
 
         builder.create().show();
     }
+
+    private void promptForQuantidade(VinhosModel vinho) {
+        AlertDialog.Builder quantidadeDialog = new AlertDialog.Builder(this);
+        quantidadeDialog.setTitle("Quantidade para " + vinho.getNome());
+
+        final EditText inputQuantidade = new EditText(this);
+        inputQuantidade.setHint("Máximo: " + vinho.getEstoque());
+        quantidadeDialog.setView(inputQuantidade);
+
+        quantidadeDialog.setPositiveButton("OK", (dialog, which) -> {
+            String quantidadeStr = inputQuantidade.getText().toString();
+            if (!quantidadeStr.isEmpty()) {
+                int quantidadeEscolhida = Integer.parseInt(quantidadeStr);
+                if (quantidadeEscolhida <= vinho.getEstoque()) {
+                    spinnerVinho.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,
+                            new String[]{vinho.getNome() + " - " + quantidadeEscolhida + " unidades"}));
+                } else {
+                    showToast("Quantidade maior que o estoque disponível.");
+                }
+            }
+        });
+
+        quantidadeDialog.setNegativeButton("Cancelar", null);
+        quantidadeDialog.create().show();
+    }
 }
+

@@ -23,10 +23,12 @@ public class VendasDAO extends AbstrataDAO {
             Open(); // Open the database
 
             ContentValues values = new ContentValues();
+            values.put(VendasModel.ID_CLIENTE, venda.getIdCliente()); // Insert id_cliente
             values.put(VendasModel.COLUMN_CLIENTE, venda.getCliente());
             values.put(VendasModel.COLUMN_VINHO, venda.getVinho());
             values.put(VendasModel.COLUMN_DATA_VENDA, venda.getDataVenda().toString()); // Converte Date para String
             values.put(VendasModel.COLUMN_QUANTIDADE, venda.getQuantidade());
+            values.put(VendasModel.COLUMN_TOTALVENDA, venda.getTotalVenda()); // Insert total_venda
 
             result = db.insert(VendasModel.TABLE_NAME, null, values);  // Insere no banco
         } finally {
@@ -36,7 +38,6 @@ public class VendasDAO extends AbstrataDAO {
         return result;
     }
 
-    // Método para obter todas as vendas
     public List<VendasModel> getAll() {
         List<VendasModel> vendasList = new ArrayList<>();
         Cursor cursor = null;
@@ -56,6 +57,11 @@ public class VendasDAO extends AbstrataDAO {
                     int idIndex = cursor.getColumnIndex(VendasModel.COLUMN_ID);
                     if (idIndex != -1) {
                         venda.setId(cursor.getInt(idIndex));
+                    }
+
+                    int idClienteIndex = cursor.getColumnIndex(VendasModel.ID_CLIENTE); // Get id_cliente
+                    if (idClienteIndex != -1) {
+                        venda.setIdCliente(cursor.getInt(idClienteIndex)); // Set id_cliente
                     }
 
                     int clienteIndex = cursor.getColumnIndex(VendasModel.COLUMN_CLIENTE);
@@ -81,6 +87,11 @@ public class VendasDAO extends AbstrataDAO {
                         venda.setQuantidade(cursor.getInt(quantidadeIndex));
                     }
 
+                    int totalVendaIndex = cursor.getColumnIndex(VendasModel.COLUMN_TOTALVENDA); // Get total_venda
+                    if (totalVendaIndex != -1) {
+                        venda.setTotalVenda(cursor.getDouble(totalVendaIndex)); // Set total_venda
+                    }
+
                     vendasList.add(venda);
                 } while (cursor.moveToNext());
             }
@@ -94,7 +105,6 @@ public class VendasDAO extends AbstrataDAO {
         return vendasList;
     }
 
-    // Método para buscar venda por ID
     public VendasModel getById(int id) {
         VendasModel venda = null;
         Cursor cursor = null;
@@ -111,13 +121,18 @@ public class VendasDAO extends AbstrataDAO {
 
                 // Acessa os campos conforme o ID da venda
                 int idIndex = cursor.getColumnIndex(VendasModel.COLUMN_ID);
+                int idClienteIndex = cursor.getColumnIndex(VendasModel.ID_CLIENTE);
                 int clienteIndex = cursor.getColumnIndex(VendasModel.COLUMN_CLIENTE);
                 int vinhoIndex = cursor.getColumnIndex(VendasModel.COLUMN_VINHO);
                 int dataVendaIndex = cursor.getColumnIndex(VendasModel.COLUMN_DATA_VENDA);
                 int quantidadeIndex = cursor.getColumnIndex(VendasModel.COLUMN_QUANTIDADE);
+                int totalVendaIndex = cursor.getColumnIndex(VendasModel.COLUMN_TOTALVENDA); // Get total_venda
 
                 if (idIndex != -1) {
                     venda.setId(cursor.getInt(idIndex));
+                }
+                if (idClienteIndex != -1) {
+                    venda.setIdCliente(cursor.getInt(idClienteIndex)); // Set id_cliente
                 }
                 if (clienteIndex != -1) {
                     venda.setCliente(cursor.getString(clienteIndex));
@@ -134,6 +149,9 @@ public class VendasDAO extends AbstrataDAO {
                 if (quantidadeIndex != -1) {
                     venda.setQuantidade(cursor.getInt(quantidadeIndex));
                 }
+                if (totalVendaIndex != -1) {
+                    venda.setTotalVenda(cursor.getDouble(totalVendaIndex)); // Set total_venda
+                }
             }
         } finally {
             if (cursor != null) {
@@ -145,52 +163,27 @@ public class VendasDAO extends AbstrataDAO {
         return venda;
     }
 
-    // Método para atualizar uma venda existente
-    public long update(VendasModel venda) {
-        long result = -1;
+    public int update(VendasModel venda) {
+        int rowsAffected = 0;
         try {
             Open(); // Open the database
 
             ContentValues values = new ContentValues();
+            values.put(VendasModel.ID_CLIENTE, venda.getIdCliente()); // Update id_cliente
             values.put(VendasModel.COLUMN_CLIENTE, venda.getCliente());
             values.put(VendasModel.COLUMN_VINHO, venda.getVinho());
             values.put(VendasModel.COLUMN_DATA_VENDA, venda.getDataVenda().toString()); // Converte Date para String
             values.put(VendasModel.COLUMN_QUANTIDADE, venda.getQuantidade());
+            values.put(VendasModel.COLUMN_TOTALVENDA, venda.getTotalVenda()); // Update total_venda
 
             String selection = VendasModel.COLUMN_ID + " = ?";
             String[] selectionArgs = { String.valueOf(venda.getId()) };
 
-            result = db.update(VendasModel.TABLE_NAME, values, selection, selectionArgs);
+            rowsAffected = db.update(VendasModel.TABLE_NAME, values, selection, selectionArgs);
         } finally {
             Close(); // Close the database
         }
-        return result; // Returns the number of rows affected
-    }
 
-    // Método para atualizar o estoque do vinho
-    public boolean updateVinhoEstoque(String nomeVinho, int quantidadeVendida) {
-        Open(); // Open the database
-        try {
-            String sql = "UPDATE tb_vinhos SET estoque = estoque - ? WHERE nome = ?";
-            db.execSQL(sql, new Object[]{quantidadeVendida, nomeVinho});
-            return true;
-        } finally {
-            Close(); // Close the database
-        }
-    }
-
-    // Método para deletar uma venda pelo ID
-    public long delete(int id) {
-        long result = -1;
-        try {
-            Open(); // Open the database
-            String whereClause = VendasModel.COLUMN_ID + " = ?";
-            String[] whereArgs = { String.valueOf(id) };
-
-            result = db.delete(VendasModel.TABLE_NAME, whereClause, whereArgs);
-        } finally {
-            Close(); // Close the database
-        }
-        return result;
+        return rowsAffected;
     }
 }

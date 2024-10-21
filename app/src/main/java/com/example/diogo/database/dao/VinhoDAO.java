@@ -181,7 +181,6 @@ public class VinhoDAO extends AbstrataDAO {
         return vinho;
     }
 
-    // Método para atualizar vinho
     public long update(VinhosModel vinho) {
         long result = -1;
         try {
@@ -200,6 +199,33 @@ public class VinhoDAO extends AbstrataDAO {
             String whereClause = VinhosModel.COLUNA_ID + " = ?";
             String[] whereArgs = { String.valueOf(vinho.getId()) };
 
+            // A chamada a db.update deve retornar o número de linhas afetadas
+            result = db.update(VinhosModel.TABLE_NAME, values, whereClause, whereArgs);
+        } finally {
+            Close();
+        }
+
+        return result; // Certifique-se de retornar o número de linhas afetadas
+    }
+
+    public long updateVinho(VinhosModel vinho) {
+        long result = -1;
+        try {
+            Open();
+
+            ContentValues values = new ContentValues();
+            values.put(VinhosModel.COLUNA_NOME, vinho.getNome());
+            values.put(VinhosModel.COLUNA_TIPO, vinho.getTipo());
+            values.put(VinhosModel.COLUNA_SAFRA, vinho.getSafra());
+            values.put(VinhosModel.COLUNA_PAIS_ORIGEM, vinho.getPaisOrigem());
+            values.put(VinhosModel.COLUNA_GRADUACAO_ALCOOLICA, vinho.getGraduacaoAlcoolica());
+            values.put(VinhosModel.COLUNA_VOLUME, vinho.getVolume());
+            values.put(VinhosModel.COLUNA_ESTOQUE, vinho.getEstoque());
+            values.put(VinhosModel.COLUNA_PRECO, vinho.getPreco());
+
+            String whereClause = VinhosModel.COLUNA_ID + " = ?";
+            String[] whereArgs = { String.valueOf(vinho.getId()) }; // Certifique-se de que o ID esteja presente
+
             result = db.update(VinhosModel.TABLE_NAME, values, whereClause, whereArgs);
         } finally {
             Close();
@@ -207,6 +233,7 @@ public class VinhoDAO extends AbstrataDAO {
 
         return result;
     }
+
 
 
     public long delete(long id) {
