@@ -11,7 +11,7 @@ import com.example.diogo.database.model.VinhosModel;
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "banco.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 9;
 
     public DBOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

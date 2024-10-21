@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import com.example.diogo.database.DBOpenHelper;
 import com.example.diogo.database.model.VendasModel;
+
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class VendasDAO extends AbstrataDAO {
             ContentValues values = new ContentValues();
             values.put(VendasModel.COLUMN_CLIENTE, venda.getCliente());
             values.put(VendasModel.COLUMN_VINHO, venda.getVinho());
-            values.put(VendasModel.COLUMN_DATA_VENDA, venda.getDataVenda());
+            values.put(VendasModel.COLUMN_DATA_VENDA, venda.getDataVenda().toString()); // Converte Date para String
             values.put(VendasModel.COLUMN_QUANTIDADE, venda.getQuantidade());
 
             result = db.insert(VendasModel.TABLE_NAME, null, values);  // Insere no banco
@@ -68,7 +70,10 @@ public class VendasDAO extends AbstrataDAO {
 
                     int dataVendaIndex = cursor.getColumnIndex(VendasModel.COLUMN_DATA_VENDA);
                     if (dataVendaIndex != -1) {
-                        venda.setDataVenda(cursor.getString(dataVendaIndex));
+                        String dataVendaStr = cursor.getString(dataVendaIndex);
+                        if (dataVendaStr != null) {
+                            venda.setDataVenda(Date.valueOf(dataVendaStr)); // Converte e seta a data
+                        }
                     }
 
                     int quantidadeIndex = cursor.getColumnIndex(VendasModel.COLUMN_QUANTIDADE);
@@ -88,14 +93,6 @@ public class VendasDAO extends AbstrataDAO {
 
         return vendasList;
     }
-    // New method to update wine stock
-    public boolean updateVinhoEstoque(String nomeVinho, int quantidadeVendida) {
-        String sql = "UPDATE tb_vinhos SET estoque = estoque - ? WHERE nome = ?";
-        db.execSQL(sql, new Object[]{quantidadeVendida, nomeVinho});
-        // You may want to check the affected rows if this update is critical
-        return true; // Update was executed
-    }
-
 
     // Método para buscar venda por ID
     public VendasModel getById(int id) {
@@ -129,7 +126,10 @@ public class VendasDAO extends AbstrataDAO {
                     venda.setVinho(cursor.getString(vinhoIndex));
                 }
                 if (dataVendaIndex != -1) {
-                    venda.setDataVenda(cursor.getString(dataVendaIndex));
+                    String dataVendaStr = cursor.getString(dataVendaIndex);
+                    if (dataVendaStr != null) {
+                        venda.setDataVenda(Date.valueOf(dataVendaStr)); // Converte e seta a data
+                    }
                 }
                 if (quantidadeIndex != -1) {
                     venda.setQuantidade(cursor.getInt(quantidadeIndex));
@@ -154,7 +154,7 @@ public class VendasDAO extends AbstrataDAO {
             ContentValues values = new ContentValues();
             values.put(VendasModel.COLUMN_CLIENTE, venda.getCliente());
             values.put(VendasModel.COLUMN_VINHO, venda.getVinho());
-            values.put(VendasModel.COLUMN_DATA_VENDA, venda.getDataVenda());
+            values.put(VendasModel.COLUMN_DATA_VENDA, venda.getDataVenda().toString()); // Converte Date para String
             values.put(VendasModel.COLUMN_QUANTIDADE, venda.getQuantidade());
 
             String selection = VendasModel.COLUMN_ID + " = ?";
@@ -167,6 +167,17 @@ public class VendasDAO extends AbstrataDAO {
         return result; // Returns the number of rows affected
     }
 
+    // Método para atualizar o estoque do vinho
+    public boolean updateVinhoEstoque(String nomeVinho, int quantidadeVendida) {
+        Open(); // Open the database
+        try {
+            String sql = "UPDATE tb_vinhos SET estoque = estoque - ? WHERE nome = ?";
+            db.execSQL(sql, new Object[]{quantidadeVendida, nomeVinho});
+            return true;
+        } finally {
+            Close(); // Close the database
+        }
+    }
 
     // Método para deletar uma venda pelo ID
     public long delete(int id) {

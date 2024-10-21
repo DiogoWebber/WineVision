@@ -1,5 +1,7 @@
 package com.example.diogo.database.model;
 
+import java.sql.Date; // ou java.util.Date
+
 public class VendasModel {
 
     public static final String TABLE_NAME = "tb_vendas";
@@ -17,27 +19,27 @@ public class VendasModel {
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     COLUMN_CLIENTE + " TEXT," +
                     COLUMN_VINHO + " TEXT," +
-                    COLUMN_DATA_VENDA + " TEXT," +
+                    COLUMN_DATA_VENDA + " DATE," + // Alterado para DATE
                     COLUMN_QUANTIDADE + " INTEGER)";
 
     // Atributos
     private int id;
     private String cliente;
     private String vinho;
-    private String dataVenda;
+    private Date dataVenda; // Usando java.sql.Date ou java.util.Date
     private int quantidade;
 
     // Construtores
     public VendasModel() {}
 
-    public VendasModel(String cliente, String vinho, String dataVenda, int quantidade) {
+    public VendasModel(String cliente, String vinho, Date dataVenda, int quantidade) {
         this.cliente = cliente;
         this.vinho = vinho;
         this.dataVenda = dataVenda;
         this.quantidade = quantidade;
     }
 
-    public VendasModel(int id, String cliente, String vinho, String dataVenda, int quantidade) {
+    public VendasModel(int id, String cliente, String vinho, Date dataVenda, int quantidade) {
         this.id = id;
         this.cliente = cliente;
         this.vinho = vinho;
@@ -70,11 +72,11 @@ public class VendasModel {
         this.vinho = vinho;
     }
 
-    public String getDataVenda() {
+    public Date getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(String dataVenda) {
+    public void setDataVenda(Date dataVenda) {
         this.dataVenda = dataVenda;
     }
 

@@ -85,7 +85,7 @@
                     android:paddingEnd="40dp"
                     android:fontFamily="@font/garamond"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/textDataVenda"
                     android:hint="dd/mm/aaaa"
                     android:layout_width="match_parent"
@@ -97,7 +97,9 @@
                     android:textSize="16sp"
                     android:textColor="@color/white"
                     android:clickable="true"
-                    android:focusable="true"/>
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"/>
+
 
 
                 <Button

@@ -1,5 +1,5 @@
 package com.example.diogo;
-
+import java.sql.Date;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -23,6 +23,8 @@ import com.example.diogo.database.dao.VinhoDAO;
 import com.example.diogo.database.model.VendasModel;
 import com.example.diogo.database.model.VinhosModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
@@ -30,7 +32,7 @@ import java.util.logging.Logger;
 public class RegistroVendaActivity extends AppCompatActivity {
     private static final Logger logger = Logger.getLogger(RegistroVendaActivity.class.getName());
     private Spinner spinnerCliente, spinnerVinho;
-    private EditText editDataVenda;
+    private EditText textDataVenda;
     private ClienteDAO clienteDAO;
     private VinhoDAO vinhoDAO;
     private VendasDAO vendasDAO;
@@ -45,7 +47,7 @@ public class RegistroVendaActivity extends AppCompatActivity {
 
         spinnerCliente = findViewById(R.id.spinnerCliente);
         spinnerVinho = findViewById(R.id.spinnerVinho);
-        TextView textDataVenda = findViewById(R.id.textDataVenda);
+        textDataVenda = findViewById(R.id.textDataVenda);  // Use the global variable here
 
         clienteDAO = new ClienteDAO(this);
         vinhoDAO = new VinhoDAO(this);
@@ -78,6 +80,7 @@ public class RegistroVendaActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
         spinnerCliente.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -107,39 +110,46 @@ public class RegistroVendaActivity extends AppCompatActivity {
         });
     }
 
+
     private void registrarVenda() {
         String clienteSelecionado = (String) spinnerCliente.getSelectedItem();
         String vinhoSelecionado = (String) spinnerVinho.getSelectedItem();
-        String dataVenda = editDataVenda.getText().toString();
+        String dataVenda = textDataVenda.getText().toString();  // formato dd/MM/yyyy
 
         if (clienteSelecionado != null && vinhoSelecionado != null && !dataVenda.isEmpty()) {
-            // Recupera a quantidade selecionada
-            String[] vinhoInfo = vinhoSelecionado.split(" - ");
-            String nomeVinho = vinhoInfo[0];
-            String quantidadeStr = vinhoInfo[1].replace(" unidades", "");
-            int quantidade = Integer.parseInt(quantidadeStr);
+            try {
+                // Converter a string de data para java.sql.Date
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                java.util.Date utilDate = dateFormat.parse(dataVenda);
+                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-            VendasModel venda = new VendasModel(clienteSelecionado, nomeVinho, dataVenda, quantidade);
-            long id = vendasDAO.insert(venda);
-            boolean vendaRegistrada = id != -1; // true se a venda foi inserida com sucesso
+                // Recupera a quantidade selecionada
+                String[] vinhoInfo = vinhoSelecionado.split(" - ");
+                String nomeVinho = vinhoInfo[0];
+                String quantidadeStr = vinhoInfo[1].replace(" unidades", "");
+                int quantidade = Integer.parseInt(quantidadeStr);
 
-            if (vendaRegistrada) {
-                // Atualiza o estoque do vinho
-                boolean estoqueAtualizado = vendasDAO.updateVinhoEstoque(nomeVinho, quantidade);
-                if (estoqueAtualizado) {
-                    Toast.makeText(this, "Venda registrada e estoque atualizado com sucesso!", Toast.LENGTH_SHORT).show();
-                    logger.info("Venda registrada: " + venda); // Log de informação
+                VendasModel venda = new VendasModel(clienteSelecionado, nomeVinho, sqlDate, quantidade);
+                long id = vendasDAO.insert(venda);
+                boolean vendaRegistrada = id != -1;
 
-                    // Set result and finish activity
-                    Intent resultIntent = new Intent();
-                    setResult(RESULT_OK, resultIntent);
-                    finish(); // Finish current activity and return to VendasActivity
+                if (vendaRegistrada) {
+                    boolean estoqueAtualizado = vendasDAO.updateVinhoEstoque(nomeVinho, quantidade);
+                    if (estoqueAtualizado) {
+                        Toast.makeText(this, "Venda registrada e estoque atualizado com sucesso!", Toast.LENGTH_SHORT).show();
+                        logger.info("Venda registrada: " + venda);
+                        setResult(RESULT_OK);
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Venda registrada, mas erro ao atualizar estoque.", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(this, "Venda registrada, mas erro ao atualizar estoque.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Erro ao registrar venda.", Toast.LENGTH_SHORT).show();
+                    logger.warning("Falha ao registrar venda para o cliente: " + clienteSelecionado + " com vinho: " + nomeVinho);
                 }
-            } else {
-                Toast.makeText(this, "Erro ao registrar venda.", Toast.LENGTH_SHORT).show();
-                logger.warning("Falha ao registrar venda para o cliente: " + clienteSelecionado + " com vinho: " + nomeVinho);
+            } catch (ParseException e) {
+                Toast.makeText(this, "Erro ao processar a data.", Toast.LENGTH_SHORT).show();
+                logger.warning("Erro ao converter a data de venda: " + e.getMessage());
             }
         } else {
             Toast.makeText(this, "Selecione um cliente, um vinho e insira uma data válida.", Toast.LENGTH_SHORT).show();
