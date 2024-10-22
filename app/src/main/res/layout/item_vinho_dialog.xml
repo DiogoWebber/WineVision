@@ -10,14 +10,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Nome do Vinho"
+        android:text="@string/nome_do_vinho"
         android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/quantidadeDisponivel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Disponível: 10"
+        android:text="@string/dispon_vel_10"
         android:textColor="@android:color/white" />
 
     <EditText
@@ -25,7 +25,7 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Qtd"
+        android:hint="@string/qtd"
         android:textColor="@android:color/white"
         android:background="@color/vinho"
         android:padding="8dp" />

@@ -20,7 +20,7 @@
             android:fontFamily="@font/garamond"
             android:paddingStart="40dp"
             android:paddingEnd="40dp"
-            android:text="Nome"
+            android:text="@string/nome"
             android:textColor="@color/white"
             android:textSize="25sp" />
 
@@ -34,7 +34,7 @@
             android:layout_marginEnd="40dp"
             android:background="@drawable/rounded_edittext"
             android:fontFamily="@font/garamond"
-            android:hint="Digite seu nome"
+            android:hint="@string/digite_seu_nome"
             android:padding="15dp"
             android:textColorHint="@color/white" />
 
@@ -46,7 +46,7 @@
             android:fontFamily="@font/garamond"
             android:paddingStart="40dp"
             android:paddingEnd="40dp"
-            android:text="Senha"
+            android:text="@string/senha"
             android:textColor="@color/white"
             android:textSize="25sp" />
 
@@ -60,7 +60,7 @@
             android:layout_marginEnd="40dp"
             android:background="@drawable/rounded_edittext"
             android:fontFamily="@font/garamond"
-            android:hint="Digite sua senha"
+            android:hint="@string/digite_sua_senha"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textColorHint="@color/white" />
@@ -79,7 +79,7 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/cinza"
                 android:fontFamily="@font/garamond"
-                android:text="ENTRAR"
+                android:text="@string/entrar"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/garamond"
-                android:text="Esqueceu sua senha?"
+                android:text="@string/esqueceu_sua_senha"
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="normal" />

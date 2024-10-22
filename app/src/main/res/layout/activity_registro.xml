@@ -19,7 +19,7 @@
                 android:id="@+id/RegistroClientes"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="Registro de Clientes"
+                android:text="@string/registro_de_clientes"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="36sp"
@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="NOME COMPLETO"
+                    android:text="@string/nome_completo"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:paddingEnd="40dp"
@@ -57,14 +57,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="E-MAIL"
+                    android:text="@string/e_mail"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:paddingEnd="40dp"
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editEmail"
-                    android:hint="Digite seu E-mail"
+                    android:hint="@string/digite_seu_e_mail"
                     android:inputType="textEmailAddress"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="TELEFONE"
+                    android:text="@string/telefone"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:paddingEnd="40dp"
@@ -95,14 +95,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="ENDEREÇO"
+                    android:text="@string/endere_o"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:paddingEnd="40dp"
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editEndereco"
-                    android:hint="Digite seu Endereco Completo"
+                    android:hint="@string/digite_seu_endereco_completo"
                     android:inputType="text"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
@@ -114,7 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="CEP"
+                    android:text="@string/cep"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:paddingEnd="40dp"
@@ -122,7 +122,7 @@
                 <EditText
                     android:id="@+id/editNumero"
                     android:maxLength="8"
-                    android:hint="Digite seu CEP"
+                    android:hint="@string/digite_seu_cep"
                     android:inputType="number"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
@@ -134,7 +134,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="SELECIONAR TIPO DE DOCUMENTO"
+                    android:text="@string/selecionar_tipo_de_documento"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:paddingEnd="40dp"
@@ -151,7 +151,7 @@
                         android:id="@+id/radioCPF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="CPF"
+                        android:text="@string/cpf"
                         android:textColor="@color/white"
                         android:fontFamily="@font/garamond"/>
 
@@ -159,7 +159,7 @@
                         android:id="@+id/radioCNPJ"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="CNPJ"
+                        android:text="@string/cnpj"
                         android:textColor="@color/white"
                         android:fontFamily="@font/garamond"/>
                 </RadioGroup>
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:inputType="number"
-                    android:hint="CPF ou CNPJ"
+                    android:hint="@string/cpf_ou_cnpj"
                     android:textColorHint="@color/white"
                     android:fontFamily="@font/garamond"/>
 
@@ -179,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/cinza"
-                    android:text="REGISTRAR"
+                    android:text="@string/registrar"
                     android:fontFamily="@font/garamond"/>
             </LinearLayout>
         </LinearLayout>

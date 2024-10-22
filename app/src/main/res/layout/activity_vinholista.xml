@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
-        android:text="VINHOS"
+        android:text="@string/vinhos"
         android:textColor="@color/white"
         android:gravity="center"
         android:textSize="30sp"
@@ -33,6 +33,6 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:backgroundTint="@color/cinza"
-        android:text="REGISTRAR NOVO VINHO"
+        android:text="@string/registrar_novo_vinho"
         android:layout_marginBottom="10dp" />
 </LinearLayout>
