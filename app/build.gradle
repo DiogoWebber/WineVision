@@ -31,7 +31,6 @@ android {
 
 dependencies {
     def room_version = "2.5.0"
-
     // Room dependencies
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version" // Para Java
@@ -51,4 +50,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2' // Use uma versão estável
     androidTestImplementation 'androidx.test.ext:junit:1.1.5' // Use uma versão estável
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1' // Use uma versão estável
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' // Versão correta da biblioteca
+
 }

@@ -63,10 +63,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        TextView viewRelatorioMensal = findViewById(R.id.viewRelatorioMensal);
-        viewRelatorioMensal.setOnClickListener(v -> {
-            // Ação para o clique no "RELATÓRIO MENSAL"
+        TextView viewRelatorio = findViewById(R.id.viewRelatorio);
+        viewRelatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GerarRelatorio.class);
+                startActivity(intent);
+            }
         });
 
 

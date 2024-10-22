@@ -45,7 +45,7 @@
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editNome"
-                    android:hint="Digite o seu Nome"
+                    android:hint="@string/digite_o_seu_nome"
                     android:inputType="text"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"

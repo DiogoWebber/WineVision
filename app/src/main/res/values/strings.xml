@@ -18,4 +18,11 @@
     <string name="mesa8">mesa8</string>
     <string name="mesa9">mesa9</string>
     <string name="salvar">salvar</string>
+    <string name="digite_o_seu_nome">Digite o seu Nome</string>
+    <string name="dados_do_vinho">Dados do Vinho</string>
+    <string name="nome_do_vinho">NOME DO VINHO</string>
+    <string name="tipo_de_vinho">TIPO DE VINHO</string>
+    <string name="ano_do_vinho">ANO DO VINHO</string>
+    <string name="pre_o">PREÇO</string>
+    <string name="salvar_vinho">SALVAR</string>
 </resources>

@@ -34,6 +34,8 @@
         <activity android:name=".vinhos.EditVinhoActivity" > </activity>
         <activity android:name=".vendas.RegistroVendaActivity" > </activity>
         <activity android:name=".vendas.VendasActivity" > </activity>
+        <activity android:name=".RelatorioActivity" > </activity>
+        <activity android:name=".GerarRelatorio" > </activity>
 
     </application>
 

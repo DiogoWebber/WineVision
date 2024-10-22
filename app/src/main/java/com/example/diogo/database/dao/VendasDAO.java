@@ -38,6 +38,7 @@ public class VendasDAO extends AbstrataDAO {
         return result;
     }
 
+
     public List<VendasModel> getAll() {
         List<VendasModel> vendasList = new ArrayList<>();
         Cursor cursor = null;
@@ -186,4 +187,117 @@ public class VendasDAO extends AbstrataDAO {
 
         return rowsAffected;
     }
+
+    public List<VendasModel> gerarRelatorioPorCliente(int idCliente) {
+        List<VendasModel> vendasList = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            Open(); // Open the database
+
+            // Query para obter a soma de quantidade e total de vendas por cliente e vinho
+            String query = "SELECT " + VendasModel.COLUMN_CLIENTE + ", " +
+                    VendasModel.COLUMN_VINHO + ", " +
+                    "SUM(" + VendasModel.COLUMN_QUANTIDADE + ") AS total_quantidade, " +
+                    "SUM(" + VendasModel.COLUMN_TOTALVENDA + ") AS total_gasto " +
+                    "FROM " + VendasModel.TABLE_NAME +
+                    " WHERE " + VendasModel.ID_CLIENTE + " = ? " +
+                    "GROUP BY " + VendasModel.COLUMN_VINHO + ", " + VendasModel.COLUMN_CLIENTE +
+                    " ORDER BY total_gasto DESC";
+
+            String[] selectionArgs = { String.valueOf(idCliente) };
+
+            cursor = db.rawQuery(query, selectionArgs);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    VendasModel venda = new VendasModel();
+
+                    int clienteIndex = cursor.getColumnIndex(VendasModel.COLUMN_CLIENTE);
+                    int vinhoIndex = cursor.getColumnIndex(VendasModel.COLUMN_VINHO);
+                    int totalQuantidadeIndex = cursor.getColumnIndex("total_quantidade");
+                    int totalGastoIndex = cursor.getColumnIndex("total_gasto");
+
+                    if (clienteIndex != -1) {
+                        venda.setCliente(cursor.getString(clienteIndex));
+                    }
+                    if (vinhoIndex != -1) {
+                        venda.setVinho(cursor.getString(vinhoIndex));
+                    }
+                    if (totalQuantidadeIndex != -1) {
+                        venda.setQuantidade(cursor.getInt(totalQuantidadeIndex));
+                    }
+                    if (totalGastoIndex != -1) {
+                        venda.setTotalVenda(cursor.getDouble(totalGastoIndex));
+                    }
+
+                    vendasList.add(venda);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            Close(); // Close the database
+        }
+
+        return vendasList;
+    }
+
+    public List<VendasModel> gerarRelatorioPorMes() {
+        List<VendasModel> vendasList = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            Open(); // Open the database
+
+            // Query para obter a soma de quantidade e total de vendas por mês e vinho
+            String query = "SELECT STRFTIME('%Y-%m', " + VendasModel.COLUMN_DATA_VENDA + ") AS mes, " +
+                    VendasModel.COLUMN_VINHO + ", " +
+                    "SUM(" + VendasModel.COLUMN_QUANTIDADE + ") AS total_quantidade, " +
+                    "SUM(" + VendasModel.COLUMN_TOTALVENDA + ") AS total_vendido " +
+                    "FROM " + VendasModel.TABLE_NAME +
+                    " GROUP BY mes, " + VendasModel.COLUMN_VINHO +
+                    " ORDER BY mes ASC";
+
+            cursor = db.rawQuery(query, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    VendasModel venda = new VendasModel();
+
+                    int mesIndex = cursor.getColumnIndex("mes");
+                    int vinhoIndex = cursor.getColumnIndex(VendasModel.COLUMN_VINHO);
+                    int totalQuantidadeIndex = cursor.getColumnIndex("total_quantidade");
+                    int totalVendidoIndex = cursor.getColumnIndex("total_vendido");
+
+                    if (mesIndex != -1) {
+                        venda.setDataVenda(Date.valueOf(cursor.getString(mesIndex) + "-01")); // Seta o mês
+                    }
+                    if (vinhoIndex != -1) {
+                        venda.setVinho(cursor.getString(vinhoIndex));
+                    }
+                    if (totalQuantidadeIndex != -1) {
+                        venda.setQuantidade(cursor.getInt(totalQuantidadeIndex));
+                    }
+                    if (totalVendidoIndex != -1) {
+                        venda.setTotalVenda(cursor.getDouble(totalVendidoIndex));
+                    }
+
+                    vendasList.add(venda);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            Close(); // Close the database
+        }
+
+        return vendasList;
+    }
+
+
+
+
 }
