@@ -14,6 +14,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.diogo.clientes.ClientesActivity;
+import com.example.diogo.relatorio.GerarRelatorio;
 import com.example.diogo.vendas.VendasActivity;
 import com.example.diogo.vinhos.VinhosActivity;
 

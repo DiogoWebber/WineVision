@@ -1,4 +1,4 @@
-package com.example.diogo;
+package com.example.diogo.relatorio;
 
 import android.graphics.Color; // Importar a classe Color
 import android.os.Build;
@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.diogo.R;
 import com.example.diogo.database.dao.VendasDAO;
 import com.example.diogo.database.model.VendasModel;
 import com.github.mikephil.charting.charts.BarChart;

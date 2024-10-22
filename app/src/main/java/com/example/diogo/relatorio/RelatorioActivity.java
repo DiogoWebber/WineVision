@@ -1,4 +1,4 @@
-package com.example.diogo;
+package com.example.diogo.relatorio;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.diogo.R;
 import com.example.diogo.database.dao.ClienteDAO; // Import ClienteDAO
 import com.example.diogo.database.dao.VendasDAO;
 import com.example.diogo.database.model.ClientesModel; // Import ClientesModel
