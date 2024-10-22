@@ -37,27 +37,29 @@ public class VendasDAO extends AbstrataDAO {
 
         return result;
     }
-    public List<VendasModel> gerarRelatorioPorMes(int mes) {
+    public List<VendasModel> gerarRelatorioPorMes(int mes, int ano) {
         List<VendasModel> vendasList = new ArrayList<>();
         Cursor cursor = null;
 
         try {
             Open(); // Open the database
 
-            // Prepare a query to sum quantity and total sales by month and wine
+            // Prepare a query to sum quantity and total sales by month, year, and wine
             String query = "SELECT STRFTIME('%Y-%m', " + VendasModel.COLUMN_DATA_VENDA + ") AS mes, " +
                     VendasModel.COLUMN_VINHO + ", " +
                     "SUM(" + VendasModel.COLUMN_QUANTIDADE + ") AS total_quantidade, " +
                     "SUM(" + VendasModel.COLUMN_TOTALVENDA + ") AS total_vendido " +
                     "FROM " + VendasModel.TABLE_NAME +
                     " WHERE STRFTIME('%m', " + VendasModel.COLUMN_DATA_VENDA + ") = ? " + // Filter by month
+                    " AND STRFTIME('%Y', " + VendasModel.COLUMN_DATA_VENDA + ") = ? " + // Filter by year
                     " GROUP BY mes, " + VendasModel.COLUMN_VINHO +
                     " ORDER BY mes ASC";
 
             // Convert month to string format (01, 02, ..., 12)
             String mesString = String.format("%02d", mes);
+            String anoString = String.valueOf(ano); // Convert year to string
 
-            cursor = db.rawQuery(query, new String[]{mesString});
+            cursor = db.rawQuery(query, new String[]{mesString, anoString});
 
             if (cursor != null && cursor.moveToFirst()) {
                 do {
@@ -93,10 +95,6 @@ public class VendasDAO extends AbstrataDAO {
 
         return vendasList;
     }
-
-
-
-
     public List<VendasModel> getAll() {
         List<VendasModel> vendasList = new ArrayList<>();
         Cursor cursor = null;

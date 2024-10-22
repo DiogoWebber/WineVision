@@ -27,16 +27,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
 
+    <Spinner
+        android:id="@+id/spinnerAno"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
     <!-- Gráfico de barras -->
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChart"
         android:layout_width="0dp"
-        android:layout_height="600dp"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerMes"
+        android:layout_height="530dp"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAno"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_margin="16dp"/>
+        android:layout_marginTop="15dp"
+        android:layout_margin="17dp"/>
 
     <TextView
         android:id="@+id/textViewTotalQuantidade"
