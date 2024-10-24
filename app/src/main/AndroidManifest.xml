@@ -2,9 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -16,28 +15,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Diogo"
         tools:targetApi="31">
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".clientes.RegistroActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".clientes.ClientesActivity"></activity>
-        <activity android:name=".vinhos.RegistroVinhosActivity"> </activity>
-        <activity android:name=".clientes.EditUserActivity"> </activity>
-        <activity android:name=".vinhos.VinhosActivity"> </activity>
-        <activity android:name=".vinhos.EditVinhoActivity" > </activity>
-        <activity android:name=".vendas.RegistroVendaActivity" > </activity>
-        <activity android:name=".vendas.VendasActivity" > </activity>
-        <activity android:name=".relatorio.RelatorioActivity" > </activity>
-        <activity android:name=".relatorio.GerarRelatorio" > </activity>
-        <activity android:name=".relatorio.RelatorioMesActivity" > </activity>
+        <activity android:name=".clientes.RegistroActivity"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".clientes.ClientesActivity"/>
+        <activity android:name=".vinhos.RegistroVinhosActivity"/>
+        <activity android:name=".clientes.EditUserActivity"/>
+        <activity android:name=".vinhos.VinhosActivity"/>
+        <activity android:name=".vinhos.EditVinhoActivity"/>
+        <activity android:name=".vendas.RegistroVendaActivity"/>
+        <activity android:name=".vendas.VendasActivity"/>
+        <activity android:name=".relatorio.RelatorioActivity"/>
+        <activity android:name=".relatorio.GerarRelatorio"/>
+        <activity android:name=".relatorio.RelatorioMesActivity"/>
 
+        <!-- Adicionando FileProvider -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 

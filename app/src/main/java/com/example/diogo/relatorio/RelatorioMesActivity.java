@@ -1,14 +1,24 @@
 package com.example.diogo.relatorio;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color; // Importar a classe Color
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.example.diogo.R;
 import com.example.diogo.database.dao.VendasDAO;
@@ -23,7 +33,11 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.components.Legend;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RelatorioMesActivity extends AppCompatActivity {
@@ -48,6 +62,7 @@ public class RelatorioMesActivity extends AppCompatActivity {
         vendasDAO = new VendasDAO(this);
         totalQuantidadeTextView = findViewById(R.id.textViewTotalQuantidade);
         totalGastoTextView = findViewById(R.id.textViewTotalGasto);
+        Button buttonExportar = findViewById(R.id.buttonExportar); // Obtém o botão de exportação
 
         // Definindo a cor do texto como branco
         totalQuantidadeTextView.setTextColor(Color.WHITE);
@@ -84,6 +99,13 @@ public class RelatorioMesActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // Não faz nada
+            }
+        });
+        // Listener para o botão de exportação
+        buttonExportar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exportarGraficoComoImagem();
             }
         });
     }
@@ -182,6 +204,64 @@ public class RelatorioMesActivity extends AppCompatActivity {
         barChart.setExtraOffsets(0f, 0f, 0f, 50f); // 50f adiciona espaço extra na parte inferior do gráfico
 
         barChart.invalidate(); // Atualiza o gráfico
+    }
+    private void exportarGraficoComoImagem() {
+        // Captura a imagem do gráfico
+        barChart.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(barChart.getDrawingCache());
+        barChart.setDrawingCacheEnabled(false);
+
+        // Obter os totais e o mês e ano selecionados
+        String totalQuantidade = totalQuantidadeTextView.getText().toString();
+        String totalGasto = totalGastoTextView.getText().toString();
+        String mesSelecionado = (String) spinnerMes.getSelectedItem();
+        String anoSelecionado = (String) spinnerAno.getSelectedItem();
+
+        // Criar um novo bitmap para incluir os detalhes do relatório
+        Bitmap reportBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight() + 200, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(reportBitmap);
+        canvas.drawBitmap(bitmap, 0, 0, null); // Desenhar o gráfico no novo bitmap
+
+        // Configurar o paint para o texto
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE); // Cor do texto
+        paint.setTextSize(40); // Tamanho do texto
+        paint.setStyle(Paint.Style.FILL); // Estilo de preenchimento
+
+        // Desenhar os detalhes na imagem
+        canvas.drawText("" + totalQuantidade, 50, bitmap.getHeight() + 100, paint);
+        canvas.drawText("" + totalGasto, 50, bitmap.getHeight() + 150, paint);
+        canvas.drawText("Mês: " + mesSelecionado + " Ano: " + anoSelecionado, 50, bitmap.getHeight() + 200, paint);
+
+        // Salvar a imagem no armazenamento
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
+        File dir = new File(path + "/relatorios/");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        String fileName = "relatorio_" + new Date().getTime() + ".png";
+        File file = new File(dir, fileName);
+
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            reportBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+
+            // Chama o método de compartilhamento
+            compartilharImagem(file);
+        } catch (IOException e) {
+            Toast.makeText(this, "Erro ao exportar imagem: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private void compartilharImagem(File file) {
+        Uri imageUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".fileprovider", file);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/png");
+        intent.putExtra(Intent.EXTRA_STREAM, imageUri);
+        intent.putExtra(Intent.EXTRA_TEXT, "Veja meu relatório de vendas!");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(Intent.createChooser(intent, "Compartilhar Relatório"));
     }
 
 
