@@ -53,7 +53,7 @@ public class RelatorioMesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_relatorio_mes);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.black));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.cinza));
         }
 
         barChart = findViewById(R.id.barChart);

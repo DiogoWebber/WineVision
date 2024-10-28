@@ -11,7 +11,8 @@
 
     <ScrollView
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +45,6 @@
                     android:text="@string/nome_do_vinho"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:paddingEnd="40dp"
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editNomeVinho"
@@ -62,7 +62,6 @@
                     android:text="@string/tipo_de_vinho"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:paddingEnd="40dp"
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editTipoVinho"
@@ -72,18 +71,85 @@
                     android:layout_width="match_parent"
                     android:fontFamily="@font/garamond"/>
 
-                <!-- Ano do Vinho -->
+                <!-- Safra -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="@string/ano_do_vinho"
+                    android:text="@string/safra"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:paddingEnd="40dp"
                     android:fontFamily="@font/garamond"/>
                 <EditText
-                    android:id="@+id/editAnoVinho"
+                    android:id="@+id/editSafra"
+                    android:inputType="number"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/garamond"/>
+
+                <!-- País de Origem -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/pa_s_de_origem"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/garamond"/>
+                <EditText
+                    android:id="@+id/editPaisOrigem"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/garamond"/>
+
+                <!-- Graduação Alcoólica -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/gradua_o_alco_lica"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/garamond"/>
+                <EditText
+                    android:id="@+id/editGraduacaoAlcoolica"
+                    android:inputType="numberDecimal"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/garamond"/>
+
+                <!-- Volume (ml) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/volume_ml"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/garamond"/>
+                <EditText
+                    android:id="@+id/editVolume"
+                    android:inputType="number"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/white"
+                    android:layout_width="match_parent"
+                    android:fontFamily="@font/garamond"/>
+
+                <!-- Estoque -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="@string/estoque"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/garamond"/>
+                <EditText
+                    android:id="@+id/editEstoque"
                     android:inputType="number"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/white"
@@ -91,14 +157,13 @@
                     android:fontFamily="@font/garamond"/>
 
                 <!-- Preço -->
-                 <TextView
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:text="@string/pre_o"
+                    android:text="@string/pre_o_r"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:paddingEnd="40dp"
                     android:fontFamily="@font/garamond"/>
                 <EditText
                     android:id="@+id/editPrecoVinho"

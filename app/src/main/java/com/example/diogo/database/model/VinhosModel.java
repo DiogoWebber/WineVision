@@ -40,24 +40,25 @@ public class VinhosModel {
     public static String DROP_TABLE =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
+    // Default constructor
     public VinhosModel() {
     }
 
-    public VinhosModel(long id, String nome, String tipo, int safra, double preco) {
+    // Full constructor with all fields
+    public VinhosModel(long id, String nome, String tipo, int safra, String paisOrigem,
+                       double graduacaoAlcoolica, double volume, int estoque, double preco) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.safra = safra;
+        this.paisOrigem = paisOrigem;
+        this.graduacaoAlcoolica = graduacaoAlcoolica;
+        this.volume = volume;
+        this.estoque = estoque;
         this.preco = preco;
-        // Set default values for other fields if necessary
-        this.paisOrigem = ""; // or any default value
-        this.graduacaoAlcoolica = 0.0; // or any default value
-        this.volume = 0.0; // or any default value
-        this.estoque = 0; // or any default value
     }
 
-    // Getters e Setters
-
+    // Getters and Setters
     public long getId() {
         return id;
     }

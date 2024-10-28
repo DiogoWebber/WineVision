@@ -135,7 +135,7 @@ public class RegistroVendaActivity extends AppCompatActivity {
             // Atualiza a quantidade do vinho selecionado
             vinhoSelecionado.setEstoque(vinhoSelecionado.getEstoque() - quantidade); // Subtrai a quantidade vendida
 
-            long result = vinhoDAO.update(vinhoSelecionado); // Atualiza o vinho no banco de dados
+            long result = vinhoDAO.updateVinho(vinhoSelecionado); // Atualiza o vinho no banco de dados
 
             // Verifica se a venda foi registrada e se a atualização do estoque foi bem-sucedida
             if (id != -1 && result > 0) {

@@ -1,6 +1,7 @@
 package com.example.diogo.vinhos;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,16 +17,17 @@ import com.example.diogo.database.model.VinhosModel;
 
 public class EditVinhoActivity extends AppCompatActivity {
 
-    private EditText nomeTextView;
-    private EditText tipoTextView;
-    private EditText anoTextView;
-    private EditText precoTextView;
+    private EditText nomeTextView, tipoTextView, anoTextView, precoTextView;
+    private EditText safraTextView, paisTextView, graduacaoTextView, volumeTextView, estoqueTextView;
     private Button btnSalvar;
     private VinhoDAO vinhoDAO;
     private long vinhoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.vinho));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_vinho);
 
@@ -41,8 +43,13 @@ public class EditVinhoActivity extends AppCompatActivity {
         // Bind views
         nomeTextView = findViewById(R.id.editNomeVinho);
         tipoTextView = findViewById(R.id.editTipoVinho);
-        anoTextView = findViewById(R.id.editAnoVinho);
+        safraTextView = findViewById(R.id.editSafra);
+        paisTextView = findViewById(R.id.editPaisOrigem);
+        graduacaoTextView = findViewById(R.id.editGraduacaoAlcoolica);
+        volumeTextView = findViewById(R.id.editVolume);
+        estoqueTextView = findViewById(R.id.editEstoque);
         precoTextView = findViewById(R.id.editPrecoVinho);
+
         btnSalvar = findViewById(R.id.btnSalvarVinho);
 
         // Load the wine data for the given ID
@@ -63,35 +70,52 @@ public class EditVinhoActivity extends AppCompatActivity {
             // Populate the EditText fields with wine data
             nomeTextView.setText(vinho.getNome());
             tipoTextView.setText(vinho.getTipo());
-            anoTextView.setText(String.valueOf(vinho.getSafra())); // Use the correct method to retrieve the year
-            precoTextView.setText(String.valueOf(vinho.getPreco())); // Use the correct method to retrieve the price
+            safraTextView.setText(String.valueOf(vinho.getSafra()));
+            paisTextView.setText(vinho.getPaisOrigem());
+            graduacaoTextView.setText(String.valueOf(vinho.getGraduacaoAlcoolica()));
+            volumeTextView.setText(String.valueOf(vinho.getVolume()));
+            estoqueTextView.setText(String.valueOf(vinho.getEstoque()));
+            precoTextView.setText(String.valueOf(vinho.getPreco()));
         } else {
             Toast.makeText(this, "Vinho não encontrado.", Toast.LENGTH_SHORT).show();
-            finish(); // Close the activity if the wine is not found
+            finish();
         }
     }
 
     private void saveVinhoData() {
-        String nome = nomeTextView.getText().toString();
-        String tipo = tipoTextView.getText().toString();
-        String anoStr = anoTextView.getText().toString();
-        String precoStr = precoTextView.getText().toString();
+        String nome = nomeTextView.getText().toString().trim();
+        String tipo = tipoTextView.getText().toString().trim();
+        String safraStr = safraTextView.getText().toString().trim();
+        String pais = paisTextView.getText().toString().trim();
+        String graduacaoStr = graduacaoTextView.getText().toString().trim();
+        String volumeStr = volumeTextView.getText().toString().trim();
+        String estoqueStr = estoqueTextView.getText().toString().trim();
+        String precoStr = precoTextView.getText().toString().trim();
 
-        // Validate input fields
-        if (TextUtils.isEmpty(nome) || TextUtils.isEmpty(tipo) || TextUtils.isEmpty(anoStr) || TextUtils.isEmpty(precoStr)) {
-            Toast.makeText(this, "Por favor, preencha todos os campos obrigatórios.", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(nome) || TextUtils.isEmpty(tipo) ||
+                TextUtils.isEmpty(safraStr) || TextUtils.isEmpty(pais) ||
+                TextUtils.isEmpty(graduacaoStr) || TextUtils.isEmpty(volumeStr) ||
+                TextUtils.isEmpty(estoqueStr) || TextUtils.isEmpty(precoStr)) {
+
+            Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         try {
-            int ano = Integer.parseInt(anoStr); // Convert year input to int
-            double preco = Double.parseDouble(precoStr); // Convert price input to double
+            int safra = Integer.parseInt(safraStr);
+            double graduacao = Double.parseDouble(graduacaoStr);
+            double volume = Double.parseDouble(volumeStr);
+            int estoque = Integer.parseInt(estoqueStr);
+            double preco = Double.parseDouble(precoStr);
 
-            // Create a new VinhosModel object
-            VinhosModel vinho = new VinhosModel(vinhoId, nome, tipo, ano, preco);
-            long result = vinhoDAO.updateVinho(vinho); // Update the wine in the DAO
+            if (safra < 0 || volume < 0 || estoque < 0 || preco < 0) {
+                Toast.makeText(this, "Valores não podem ser negativos.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            // Check if the update was successful
+            VinhosModel vinho = new VinhosModel(vinhoId, nome, tipo, safra, pais, graduacao, volume, estoque, preco);
+            long result = vinhoDAO.updateVinho(vinho);
+
             if (result != -1) {
                 Toast.makeText(this, "Vinho atualizado com sucesso!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EditVinhoActivity.this, VinhosActivity.class);
@@ -102,7 +126,8 @@ public class EditVinhoActivity extends AppCompatActivity {
                 Toast.makeText(this, "Erro ao atualizar vinho. Tente novamente.", Toast.LENGTH_SHORT).show();
             }
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Erro ao converter o ano ou preço. Verifique os valores.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Erro ao converter valores numéricos. Verifique os valores.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

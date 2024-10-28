@@ -3,11 +3,8 @@ package com.example.diogo.database.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.example.diogo.database.DBOpenHelper;
-import com.example.diogo.database.model.ClientesModel;
-import com.example.diogo.database.model.VendasModel;
 import com.example.diogo.database.model.VinhosModel;
 
 import java.util.ArrayList;
@@ -42,7 +39,6 @@ public class VinhoDAO extends AbstrataDAO {
         return result;
     }
 
-    // Método para buscar todos os vinhos
     public List<VinhosModel> getAll() {
         List<VinhosModel> vinhoList = new ArrayList<>();
         Cursor cursor = null;
@@ -117,7 +113,6 @@ public class VinhoDAO extends AbstrataDAO {
         return vinhoList;
     }
 
-    // Método para buscar vinho por ID
     public VinhosModel getById(long id) {
         VinhosModel vinho = null;
         Cursor cursor = null;
@@ -181,7 +176,7 @@ public class VinhoDAO extends AbstrataDAO {
         return vinho;
     }
 
-    public long update(VinhosModel vinho) {
+    public long updateVinho(VinhosModel vinho) {
         long result = -1;
         try {
             Open();
@@ -207,34 +202,6 @@ public class VinhoDAO extends AbstrataDAO {
 
         return result; // Certifique-se de retornar o número de linhas afetadas
     }
-
-    public long updateVinho(VinhosModel vinho) {
-        long result = -1;
-        try {
-            Open();
-
-            ContentValues values = new ContentValues();
-            values.put(VinhosModel.COLUNA_NOME, vinho.getNome());
-            values.put(VinhosModel.COLUNA_TIPO, vinho.getTipo());
-            values.put(VinhosModel.COLUNA_SAFRA, vinho.getSafra());
-            values.put(VinhosModel.COLUNA_PAIS_ORIGEM, vinho.getPaisOrigem());
-            values.put(VinhosModel.COLUNA_GRADUACAO_ALCOOLICA, vinho.getGraduacaoAlcoolica());
-            values.put(VinhosModel.COLUNA_VOLUME, vinho.getVolume());
-            values.put(VinhosModel.COLUNA_ESTOQUE, vinho.getEstoque());
-            values.put(VinhosModel.COLUNA_PRECO, vinho.getPreco());
-
-            String whereClause = VinhosModel.COLUNA_ID + " = ?";
-            String[] whereArgs = { String.valueOf(vinho.getId()) }; // Certifique-se de que o ID esteja presente
-
-            result = db.update(VinhosModel.TABLE_NAME, values, whereClause, whereArgs);
-        } finally {
-            Close();
-        }
-
-        return result;
-    }
-
-
 
     public long delete(long id) {
         long result = -1;
