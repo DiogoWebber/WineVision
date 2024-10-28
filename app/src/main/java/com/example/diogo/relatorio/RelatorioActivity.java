@@ -126,14 +126,14 @@ public class RelatorioActivity extends AppCompatActivity {
         // Display total quantity and spending
         TextView totalQuantidadeTextView = findViewById(R.id.textViewTotalQuantidade);
         TextView totalGastoTextView = findViewById(R.id.textViewTotalGasto);
-        totalQuantidadeTextView.setText("Total Quantidade: " + totalQuantidade);
-        totalGastoTextView.setText("Total Gasto: R$ " + String.format("%.2f", totalGasto));
+        totalQuantidadeTextView.setText("Quantidade Total: " + totalQuantidade);
+        totalGastoTextView.setText("Gasto Total: R$ " + String.format("%.2f", totalGasto));
 
         // Create datasets
         BarDataSet quantidadeDataSet = new BarDataSet(quantidadeEntries, "Quantidade");
         quantidadeDataSet.setColor(ColorTemplate.MATERIAL_COLORS[0]);
 
-        BarDataSet gastoDataSet = new BarDataSet(gastoEntries, "Total Gasto (R$)");
+        BarDataSet gastoDataSet = new BarDataSet(gastoEntries, "Gasto Total (R$)");
         gastoDataSet.setColor(ColorTemplate.MATERIAL_COLORS[1]);
 
         // Set data on chart

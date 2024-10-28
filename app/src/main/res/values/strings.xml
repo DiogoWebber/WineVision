@@ -60,7 +60,7 @@
     <string name="registrar">REGISTRAR</string>
     <string name="relat_rio_de_vendas_por_cliente">Relatório de Vendas por Cliente</string>
     <string name="quantidade_total_0">Quantidade Total: 0</string>
-    <string name="total_gasto_r_0_00">Total Gasto: R$ 0.00</string>
+    <string name="total_gasto_r_0_00">Gasto Total: R$ 0.00</string>
     <string name="registro_de_vendas">Registro de Vendas</string>
     <string name="selecione_o_cliente">SELECIONE O CLIENTE</string>
     <string name="selecione_o_os_vinho_s">SELECIONE O(OS) VINHO(S)</string>

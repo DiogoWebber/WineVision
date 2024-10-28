@@ -150,7 +150,7 @@ public class RelatorioMesActivity extends AppCompatActivity {
         if (vendasList.isEmpty()) {
             // Atualizar campos de quantidade total e total gasto para zero
             totalQuantidadeTextView.setText("Quantidade Total: 0");
-            totalGastoTextView.setText("Total Gasto: R$ 0.00");
+            totalGastoTextView.setText("Gasto Total: R$ 0.00");
             return;
         }
 
@@ -169,7 +169,7 @@ public class RelatorioMesActivity extends AppCompatActivity {
 
         // Atualizar os campos de texto com os totais
         totalQuantidadeTextView.setText("Quantidade Total: " + totalQuantidade);
-        totalGastoTextView.setText("Total Gasto: R$ " + String.format("%.2f", totalGasto));
+        totalGastoTextView.setText("Gasto Total: R$ " + String.format("%.2f", totalGasto));
 
         BarDataSet dataSet = new BarDataSet(entries, "Quantidade");
         dataSet.setColor(ColorTemplate.MATERIAL_COLORS[0]);
